@@ -100,7 +100,7 @@ public class InformationDaoTest
 		InformationDao idao = new InformationDaoImpl();
 		Information i = null;
 		
-		i = idao.findById(1);
+		i = idao.queryInformationById(1);
 		
 		if (i != null)
 		{

@@ -34,9 +34,17 @@ a{color: #000;}
 	position: absolute;
 	top: 48px;
 	width: 100%;
-	height: 100%;
-}
 
+}
+#start_txt{
+	text-align: center;
+	color: #c62f2f;
+	font-size: 1em;
+}
+::-webkit-input-placeholder { color:#bbb; }
+::-moz-placeholder { color:#bbb; } /* firefox 19+ */
+:-ms-input-placeholder { color:#bbb; } /* ie */
+input:-moz-placeholder { color:#bbb; }
 /*弹窗*/
 .one-dialog{
 	z-index: 2;
@@ -63,6 +71,40 @@ a{color: #000;}
 .dialog-inner{
 	line-height: 24px;
 	margin: 12px 0;
+}
+#dialog-love{
+	z-index: 2;
+	position: fixed;
+	top: 40%;
+	left:50%;
+	width: 330px;
+	height: 165px;
+	display: none;
+	border-radius: 5px;
+	margin-left:-165px ;
+	background-image: url(../img/新年图2标.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	box-shadow: 0px 0px 0px 10000px rgba(0,0,0,.6);
+}
+#dialog-love>span{
+	position: absolute;
+	top: 115px;
+	height: 48px;
+	width: 165px;
+	font-size: 24px;
+	line-height: 48px;
+	color: rgb(237,156,26);
+	text-align: center;
+	border: 1px solid rgb(237,156,26);
+	border-bottom: 0;
+}
+#dialog-love>span:nth-child(1){
+	border-left: 0;
+}
+#dialog-love>span:nth-child(2){
+	left:165px ;
+	border-right: 0;
 }
 #dialog-login{
 	height: 96px;
@@ -178,6 +220,9 @@ input#rili-date{
 .information-people>.glyphicon{
 	font-size: 20px;
 	line-height: 12px;
+}
+.add-color{
+	color: #e84e40 ;
 }
 .people-number{
 	float: right;
@@ -316,10 +361,10 @@ input[type="number"]{-moz-appearance:textfield;}
 	height: 32px;
 	margin: 14px 0px;
 }
-::-webkit-input-placeholder { color:#bbb; }
-::-moz-placeholder { color:#bbb; } /* firefox 19+ */
-:-ms-input-placeholder { color:#bbb; } /* ie */
-input:-moz-placeholder { color:#bbb; }
+.fache-beizhu>input::-webkit-input-placeholder { color:#bbb;text-align: center;font-size: 12px; }
+.fache-beizhu>input::-moz-placeholder { color:#bbb;text-align: center;font-size: 12px; } /* firefox 19+ */
+.fache-beizhu>input:-ms-input-placeholder { color:#bbb;text-align: center;font-size: 12px; } /* ie */
+
 
 .fache-submit{
 	position: relative;
@@ -637,9 +682,7 @@ input:-moz-placeholder { color:#bbb; }
 
 
 /*pull down/up section*/
-#wrapper{
-	height: auto;
-}
+
 #pullDown, #pullUp {
 	background:#fff;
 	height:40px;
@@ -698,7 +741,7 @@ input:-moz-placeholder { color:#bbb; }
 
 /*mypinche*/
 .one-information{
-	
+	width: 100%;
 }
 .btn-see{
 	position:relative;
@@ -747,7 +790,7 @@ input:-moz-placeholder { color:#bbb; }
 		left: 0; right: 0;
 		width: 100%;
 		height: 195px;
-		background-color: rgba(0,0,0,.9) ;
+		background-color: rgba(0,0,0,.6) ;
 		z-index: 100;
 		display: none;
 }
@@ -862,4 +905,138 @@ input:-moz-placeholder { color:#bbb; }
 	background-color: rgb(232,78,64);
 	border: 0;
 	border-radius: 5px;
+}
+
+/*真爱大巴*/
+#trueLove{
+	position: relative;
+	left: 50%;
+	margin-left:-180px;
+	width: 360px;
+	height: 115px;
+	background-image: url(../img/truelove1.jpg);
+	background-size:cover;
+}
+
+/*trueLove-bus*/
+#love-form>div{
+	position: relative;
+	left: 6%;
+	width: 88%;
+	border-bottom: 2px solid rgb(180,180,180);
+}
+#love-form>div:last-child{
+	border: 0;
+}
+#love-form>div>p{
+	position: relative;
+	left: 6%;
+	margin-top: 14px;
+}
+.love-where input,.love-date>p:nth-child(2)>input:last-child,.love-date>p:nth-child(3)>input:last-child,.love-time>p:nth-child(2)>input:last-child,.love-time>p:nth-child(3)>input:last-child{
+	position: relative;
+	left: -15%;
+	float: right;
+}
+.love-where span{
+	position: absolute;
+	color: orangered;
+}
+.love-where>p:nth-child(2)>span{
+	left: 48%;
+}
+.love-where>p:nth-child(3)>span{
+	left: 48%;
+}
+.love-date>p:nth-child(2)>span:nth-child(3),.love-date>p:nth-child(3)>span:nth-child(3){
+	position: absolute;
+	left: 48%;
+}
+.love-time>p:nth-child(2)>span:nth-child(3),.love-time>p:nth-child(3)>span:nth-child(3){
+	position: absolute;
+	left: 48%;	
+}
+.love-date>p:nth-child(2)>input:nth-child(2),.love-date>p:nth-child(3)>input:nth-child(2),.love-time>p:nth-child(2)>input:nth-child(2),.love-time>p:nth-child(3)>input:nth-child(2){
+	position: absolute;
+	left: 30%;	
+}
+.love-text{
+	width: 100% !important;
+	left: 0!important;
+	height: auto;
+}
+#love-name{
+	position: relative;
+	top: 12px;
+	left: 15%;
+	width: 70%;
+	height: 32px;
+	border: 1px solid rgb(189,189,189);
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	background-image:  url(../img/user.png);
+	background-position: 8px;
+	background-repeat: no-repeat;
+	text-align: center;
+}
+#love-sushe{
+	position: relative;
+	top: 11px;
+	left: 15%;
+	width: 70%;
+	height: 32px;
+	border: 1px solid rgb(189,189,189);
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	background-image: url(../img/宿舍管理.png);
+	background-position: 8px;
+	background-repeat: no-repeat;
+	text-align: center;
+}
+#love-beizhu{
+	position: relative;
+	top: 8px;
+	color: orangered;
+	text-align: center;
+}
+#love-sub{
+	position: relative;
+	top: 10px;
+	left: 20%;
+	width: 60%;
+	height: 42px;
+	border: 0;
+	border-radius: 4px;
+	color: #fff;
+	background-color:rgb(232,78,64) ;
+}
+#love-name::-webkit-input-placeholder,#love-sushe::-webkit-input-placeholder {text-align: center; }
+#love-name::-moz-placeholder,#love-sushe::-moz-placeholder { text-align: center; } /* firefox 19+ */
+#love-name:-ms-input-placeholder,#love-sushe:-ms-input-placeholder { text-align: center; } /* ie */
+
+input[type=radio]{
+	width: 16px;
+	height: 16px;
+}
+.love-pinche{
+	margin-top: 10px;
+}
+.love-pinche>span{
+	display: block;
+}
+.love-pinche>span:nth-child(1){
+	margin-top: 15px;
+}
+.love-pinche>span:nth-child(2){
+	margin-top: 10px;
+}
+.love-pinche>span:nth-child(3),.love-pinche>span:nth-child(4){
+	position: relative;
+	width: 100%;
+}
+.love-pinche>span:nth-child(4){
+	margin-bottom: 30px;
+}
+.love-pinche b{
+	color: #000;
 }

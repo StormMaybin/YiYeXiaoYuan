@@ -4,73 +4,78 @@ import com.yiyexiaoyuan.domain.User;
 
 public interface UserDao
 {
-	
 	/**
-	 * 添加用户
+	 * method 1 添加用户
+	 * 
 	 * @author StormMaybin
 	 * @param u
 	 * @return boolean
 	 */
-	public abstract boolean add(User u);
-	
+	public abstract boolean add(User paramUser);
+
 	/**
-	 * 根据用户名查找用户
+	 * method 2 根据用户名查找用户
+	 * 
 	 * @author StormMaybin
 	 * @param userName
 	 * @return User
 	 */
 	public abstract User find(String userName);
-	
+
 	/**
-	 * 根据账号和密码查找用户
+	 * method 3 根据手机号和密码查找用户
+	 * 
 	 * @author StormMaybin
-	 * @param userName passWord
+	 * @param mobile
+	 * @param passWord
 	 * @return User
 	 */
-	public abstract User find(String userName, String passWord);
-	
+	public abstract User find(String mobile, String passWord);
+
 	/**
-	 * 根据手机号查找用户
+	 * method 4 根据手机号查找用户
+	 * 
 	 * @author StormMaybin
 	 * @param mobile
 	 * @return User
 	 */
 	public abstract User findByMobile(String mobile);
+
 	/**
-	 * 根据用户信息修改用户名
-	 * 如果修改成功则返回true
-	 * 反之返回false
+	 * method 5 根据用户信息修改用户名 如果修改成功则返回true 反之返回false
+	 * 
 	 * @author StormMaybin
-	 * @param u newUserName
+	 * @param u
+	 * @param newUserName
 	 * @return boolean
 	 */
-	public abstract boolean updateUserName (User u, String newUserName);
+	public abstract boolean updateUserName(User u, String newUserName);
+
 	/**
-	 * 根据用户设置修改用户名次数
+	 * method 6 重置密码
+	 * 
 	 * @author StormMaybin
 	 * @param u
-	 * @return void
-	 */
-	public abstract void updatePassWordCount (User u);
-	/**
-	 * 重置密码
-	 * @author StormMaybin
-	 * @param u
+	 * @param newPassWord
 	 * @return boolean
 	 */
-	public abstract boolean resetPassWord (User u, String newPassWord);
+	public abstract boolean resetPassWord(User u, String newPassWord);
+
 	/**
-	 * 把用户qq信息添加到数据库中去
+	 * method 7 把用户qq信息添加到数据库中去
+	 * 
 	 * @author StormMaybin
 	 * @return void
 	 * @param u
 	 */
-	public abstract void updateQq (User u);
+	public abstract void updateQq(User paramUser);
+
 	/**
-	 * 查询是否已经修改过用户名
+	 * method 8 查询是否可以修改用户名
+	 * 
 	 * @author StormMaybin
 	 * @param User
-	 * @return int
+	 * @return boolean
 	 */
-	public abstract int queryPassWordCount (User u);
+	public abstract boolean isCanUpdateUserName(User u);
 }

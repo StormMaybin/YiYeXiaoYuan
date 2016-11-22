@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  		<title>一页校园</title>
+   		<link href="css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="css/navbar.css" rel="stylesheet"/>
+		<style>
+			.set-prompt {
+				height: 21px;
+				text-align: center;
+				background-color: rgb(220,211,178);
+				color: rgb(206,110,84);
+			}
+		</style>
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/bootstrap.min.js"></script>	
+
+	</head>
+	<body>
+		<div class="navigation1">
+			<a href="javascript:history.go(-1)"><span class="glyphicon glyphicon-chevron-left one-left"></span></a>
+		</div>
+		<div class="one-inner-2">
+			<div class="set-prompt" id="set_rsp" hidden >
+				<span id="set_rsp_txt">oh my god</span>
+			</div>
+			<form id="form-name" action="#" method="get">
+				<input id="input-name" type="text" maxlength="16" placeholder="请填入新名称" />
+				<p>以英文字母和汉字组成,4-16个字符,一汉字为两字符</p>
+				<p class="red">用户名仅可修改一次</p>
+				<input id="user-name" class="btn btn-block" type="submit" value="修改"/>
+			</form>
+		</div>
+		<div id="used" class="one-dialog">
+			<p>用户名已被使用</p>
+		</div>
+		<div id="buhefa" class="one-dialog">
+			<p>用户名不合法</p>
+		</div>
+		<div id="corrected" class="one-dialog">
+			<p>已修改过用户名</p>
+		</div>
+		<script src="js/myRoute.js"></script>
+	</body>
+</html>

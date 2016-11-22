@@ -1,35 +1,76 @@
 package com.yiyexiaoyuan.web.controller;
 
+import com.yiyexiaoyuan.domain.User;
+import com.yiyexiaoyuan.formbean.LoginForm;
+import com.yiyexiaoyuan.service.impl.UserService;
+import com.yiyexiaoyuan.utils.WebUtils;
 import java.io.IOException;
-
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-/**
- * 处理登录请求的
- * @author StormMaybin
- */
+import javax.servlet.http.HttpSession;
+import net.sf.json.JSONObject;
+
 public class LoginServlet extends HttpServlet
 {
-	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
 		doPost(request, response);
 	}
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-		//创建web层的用户登录服务
-		//获取表单数据通过request域
-		//用户的手机号码
-		String mobile = request.getParameter("mobile");
-		//用户的密码
-		String passWord = request.getParameter("passWord");
-		//用户填写的验证码
-		String checkCode = request.getParameter("checkCode");
+		response.setContentType("application/json; charset=utf-8");
+
+		System.out.println("第一次处理提交");
+
+		User user = null;
+		LoginForm form = new LoginForm();
+		UserService service = new UserService();
+		PrintWriter out = response.getWriter();
+		JSONObject json = new JSONObject();
+
+		System.out.println(request.getParameter("mobile   "
+				+ request.getParameter("passWord")));
+
+		form = (LoginForm) WebUtils.request2Bean(request, LoginForm.class);
+		System.out.println(form);
+
+		user = service.loginService(form.getMobile(), form.getPassWord());
+
+		if (user != null)
+		{
+			request.getSession().setAttribute("user", user);
+			System.out.println("登录成功");
+			System.out.println(user.toString());
+			json.accumulate("user", user);
+			json.accumulate("status", 1);
+			out.print(json.toString());
+			out.close();
+			return;
+		}
+		if (user == null)
+		{
+			System.out.println("user为空");
+			if (service.isExitMobile(form.getMobile()))
+			{
+				System.out.println("0");
+				json.accumulate("status", 0);
+				out.print(json.toString());
+				out.close();
+				return;
+			}
+
+			System.out.println("-1");
+			json.accumulate("status", -1);
+			out.print(json.toString());
+			out.close();
+			return;
+		}
 	}
-	
 }

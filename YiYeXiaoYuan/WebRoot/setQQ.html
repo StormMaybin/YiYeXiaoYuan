@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  		<title>一页校园</title>
+   		<link href="css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="css/navbar.css" rel="stylesheet"/>
+		<style>
+			.setqq-prompt {
+				height: 21px;
+				text-align: center;
+				background-color: rgb(220,211,178);
+				color: rgb(206,110,84);
+			}
+		</style>
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/bootstrap.min.js"></script>	
+	</head>
+	<body>
+		<div class="navigation1">
+
+			<a href="javascript:history.go(-1)"><span class="glyphicon glyphicon-chevron-left one-left"></span></a>
+		</div>
+		<div class="one-inner-2">
+			<div class="setqq-prompt" id="setqq_rsp" hidden>
+				<span id="setqq_rsp_txt">oh my god</span>
+				<a id="setqq_rsp_href"></a>
+			</div>
+			<form id="form-QQ" action="#" method="get">
+				<input id="input-QQ" type="number" maxlength="12" placeholder="请填入真实QQ号提高拼车效率" required />
+				<input class="btn btn-block"  id='set_qq' type="submit" value="修改"/>
+			</form>
+		</div>
+	<script src="js/myRoute.js"></script>
+	</body>
+</html>

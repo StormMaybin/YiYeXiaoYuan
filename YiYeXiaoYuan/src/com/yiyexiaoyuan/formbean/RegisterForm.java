@@ -20,4 +20,17 @@ public class RegisterForm
 	{
 		this.checkCode = checkCode;
 	}
+	public boolean checked ()
+	{
+		boolean isOk = true;
+		if (mobile.length() != 11)
+		{
+			return isOk = false;
+		}
+		if (mobile.equals(""))
+		{
+			return isOk = false;
+		}
+		return true;
+	}
 }

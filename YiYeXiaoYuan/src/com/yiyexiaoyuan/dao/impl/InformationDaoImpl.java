@@ -17,6 +17,7 @@ public class InformationDaoImpl implements InformationDao
 {
 	
 	/**
+	 * method 1
 	 * 添加行程
 	 * @author StormMaybin
 	 * @return void
@@ -72,7 +73,9 @@ public class InformationDaoImpl implements InformationDao
 	}
 
 	/**
+	 * method 2
 	 * 根据用户id查找行程信息
+	 * 
 	 * @author StormMaybin
 	 * @param uid
 	 * @return Information
@@ -130,7 +133,9 @@ public class InformationDaoImpl implements InformationDao
 	
 	
 	/**
+	 * method 3
 	 * 查询所有的行程信息到集合中去
+	 * 
 	 * @author StormMaybin
 	 * @param void
 	 * @return ArrayList<Information>
@@ -186,12 +191,13 @@ public class InformationDaoImpl implements InformationDao
 		}
 	}
 	/**
-	 * 根据拼车信息id查找行程
+	 * method 4
+	 * 根据发起人的id查找行程信息
 	 * @author StormMaybin
 	 * @return Information
 	 * @param id
 	 */
-	public Information findById (int id)
+	public Information queryInformationByUId (int uId)
 	{
 		Connection conn = null;
 		PreparedStatement stat = null;
@@ -200,8 +206,8 @@ public class InformationDaoImpl implements InformationDao
 		conn = DBUtil.getConnection();
 		try
 		{
-			stat = conn.prepareStatement("SELECT * FROM information WHERE id = ?");
-			stat.setInt(1, id);
+			stat = conn.prepareStatement("SELECT * FROM information WHERE uid = ?");
+			stat.setInt(1, uId);
 			
 			//执行操作
 			result = stat.executeQuery();
@@ -212,8 +218,8 @@ public class InformationDaoImpl implements InformationDao
 				i = new Information();
 				
 				//封装数据
-				i.setId(id);
-				i.setUid(result.getInt("uid"));
+				i.setUid(uId);
+				i.setId(result.getInt("id"));
 				i.setStartDate(result.getDate("startDate"));
 				i.setStartPos(result.getString("startPos"));
 				i.setArrivePos(result.getString("arrivePos"));
@@ -240,7 +246,9 @@ public class InformationDaoImpl implements InformationDao
 		}
 	}
 	/**
+	 * method 5
 	 * 根据发布时间查找拼车信息
+	 * 
 	 * @author StormMaybin
 	 * @param pubTime
 	 * @return ArrayList<Information>
@@ -296,9 +304,11 @@ public class InformationDaoImpl implements InformationDao
 		}
 	}
 	/**
+	 * method 6
 	 * 查询拼车信息的Id
+	 * 
 	 * @author StormMaybin
-	 * @param
+	 * @param id
 	 * @return Information
 	 */
 	public Information findId (Information i)
@@ -350,6 +360,7 @@ public class InformationDaoImpl implements InformationDao
 		}
 	}
 	/**
+	 * method 7
 	 * 根据拼车信息的id查询到拼车信息对象
 	 * @author StormMaybin
 	 * @param id

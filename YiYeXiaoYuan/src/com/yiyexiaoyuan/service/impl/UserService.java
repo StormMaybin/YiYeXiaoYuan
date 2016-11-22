@@ -5,105 +5,113 @@ import com.yiyexiaoyuan.dao.impl.UserDaoImpl;
 import com.yiyexiaoyuan.domain.User;
 import com.yiyexiaoyuan.exception.CannotAlterUserNameException;
 import com.yiyexiaoyuan.exception.UserExitException;
-
+/**
+ * 为web层提供一系列的服务
+ * @author StormMaybin
+ */
 public class UserService
 {
-	// 申明业务逻辑层对象
+	//申明业务逻辑层的对象
 	private UserDao userDao = new UserDaoImpl();
-	
+
 	/**
-	 * 为Web层提供注册用户的服务
-	 * 
+	 * 为web层提供注册的服务
 	 * @author StormMaybin
 	 * @param u
 	 * @throws UserExitException
 	 */
 	public void registerService(User u) throws UserExitException
 	{
-		// 如果用户的手机号已经注册过，向上抛出异常
-		if (userDao.findByMobile(u.getMobile()) != null)
+		//如果这个 手机号码已经注册就不能继续注册
+		if (this.userDao.findByMobile(u.getMobile()) != null)
 		{
+			//抛出用户已存在异常
 			throw new UserExitException();
-		} 
-		else
-		{
-			// 添加用户到数据库
-			userDao.add(u);
 		}
+		//添加用户
+		this.userDao.add(u);
 	}
 	/**
-	 * 为Web层提供登录服务
+	 * 为web层提供登录的服务
 	 * @author StormMaybin
-	 * @param userName
+	 * @param mobile
 	 * @param passWord
-	 * @return User
-	 * 如果对象不为空，那么登录成功
+	 * @return
 	 */
-	public User loginService (String mobile, String passWord)
+	public User loginService(String mobile, String passWord)
 	{
-		//调用dao层向数据库中查询是否存在这个用户
-		User u = userDao.find(mobile, passWord);
+		//调用dao层处理
+		User u = this.userDao.find(mobile, passWord);
+		//返回
+		//通过判断u是否为空确定登录成功与否
 		return u;
 	}
 	/**
-	 * 为web层提供重置密码服务
+	 * 为web层提供重置密码的服务
 	 * @param u
-	 * @param passWord
+	 * @param newPassWord
 	 * @return boolean
-	 * 如果重置成功则返回true
-	 * 如果失败则返回false
+	 * 重置成功返回true，反之false
 	 */
-	public boolean resetPassWordService (User u, String newPassWord)
+	public boolean resetPassWordService(User u, String newPassWord)
 	{
-		//调用dao层的重置密码逻辑
-		boolean isSuccess = userDao.resetPassWord(u, newPassWord);
+		//调用dao层进行处理
+		boolean isSuccess = this.userDao.resetPassWord(u, newPassWord);
+		//返回结果
 		return isSuccess;
 	}
 	/**
-	 * 为Web层提供修改用户名的服务
-	 * @author StormMaybin
-	 * @param
+	 * 为web层提供修改用户名的服务
+	 * @param u
+	 * @param newUserName
 	 * @return boolean
-	 * @throws CannotAlterUserNameException 
-	 * @throws UserExitException 
+	 * @throws CannotAlterUserNameException
+	 * @throws UserExitException
 	 */
-	public boolean updateUserNameService (User u, String newUserName) throws CannotAlterUserNameException, UserExitException
+	public boolean updateUserNameService(User u, String newUserName)
+			throws CannotAlterUserNameException, UserExitException
 	{
-		//如果已经修改过用户名，那么没有修改用户名的权限
-		if (userDao.queryPassWordCount(u) == 1)
+		//判断是否有修改用户名的权限
+		if (!this.userDao.isCanUpdateUserName(u))
 		{
-			u.setPassWordCount(1);
+			//抛出不可以修改用户名异常
 			throw new CannotAlterUserNameException();
 		}
-		else //具备修改权限
+		//如果要修改的用户名已存在
+		if (this.userDao.find(newUserName) != null)
 		{
-			//如果用户名已经存在
-			if (userDao.find(newUserName) != null)
-			{
-				throw new UserExitException("用户名已存在");
-			}
-			//设置修改次数已经用完
-			userDao.updatePassWordCount(u);
-			//调用dao层的修改用户名逻辑
-			boolean isSuccess = userDao.updateUserName(u, newUserName);
-			//如果修改成功，那么将不再具备修改用户名的权限
-			if (isSuccess)
-			{
-				u.setPassWordCount(1);
-			}
-			return isSuccess;
+			//抛出用户名已存在异常
+			throw new UserExitException("用户名已存在");
 		}
+		//标记修改结果
+		boolean isSuccess = this.userDao.updateUserName(u, newUserName);
+		//返回操作结果
+		return isSuccess;
 	}
 	/**
-	 * 为Web层提供添加qq信息的服务
-	 * @author StormMaybin
+	 * 为web层提供添加qq信息的服务
 	 * @param u
-	 * @return
 	 */
-	public void updateQqService (User u)
+	public void updateQqService(User u)
 	{
-		//前提校验数据
-		//调用dao层的业务逻辑
-		userDao.updateQq(u);
+		//调用dao层实现
+		this.userDao.updateQq(u);
+	}
+	/**
+	 * 判断手机号码是否已存在
+	 * @param mobile
+	 * @return boolean
+	 */
+	public boolean isExitMobile(String mobile)
+	{
+		
+		//UserDao udao = new UserDaoImpl();
+
+		if (userDao.findByMobile(mobile) != null)
+		{
+			return true;
+		}
+
+		return false;
 	}
 }

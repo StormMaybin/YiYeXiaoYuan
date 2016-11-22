@@ -7,7 +7,7 @@
   <display-name></display-name>
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.yiyexiaoyuan.controller.LoginServlet</servlet-class>
+    <servlet-class>com.yiyexiaoyuan.web.controller.LoginServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>RegisterServlet</servlet-name>
@@ -21,6 +21,11 @@
     <servlet-name>IndexServlet</servlet-name>
     <servlet-class>com.yiyexiaoyuan.web.controller.IndexServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ValidateServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.ValidateServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -40,6 +45,10 @@
   <servlet-mapping>
     <servlet-name>IndexServlet</servlet-name>
     <url-pattern>/servlet/IndexServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ValidateServlet</servlet-name>
+    <url-pattern>/servlet/ValidateServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

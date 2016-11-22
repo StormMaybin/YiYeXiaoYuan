@@ -8,6 +8,7 @@ import com.yiyexiaoyuan.domain.User;
 
 public class UserDaoTest
 {
+	//添加用户测试
 	@Test
 	public void add ()
 	{
@@ -19,7 +20,7 @@ public class UserDaoTest
 		UserDao dao = new UserDaoImpl();
 		dao.add(user);
 	}
-	//用户名查找
+	//用户名查找测试
 	@Test
 	public void findTest ()
 	{
@@ -44,7 +45,7 @@ public class UserDaoTest
 		if (u != null)
 			System.out.println(u.toString());
 	}
-	//根据手机号码查找用户
+	//根据手机号码查找用户测试
 	@Test
 	public void findByMobile ()
 	{
@@ -101,7 +102,7 @@ public class UserDaoTest
 	}
 	//查询是否具有修改用户名权限
 	@Test
-	public void queryPassWordCountTest()
+	public void isCanUpdateUserNameTest()
 	{
 		UserDao udao = new UserDaoImpl();
 		
@@ -111,6 +112,6 @@ public class UserDaoTest
 		u.setPassWord("StormMa");
 		u.setQq("1325338799");
 		
-		System.out.println(udao.queryPassWordCount(u));
+		System.out.println(udao.isCanUpdateUserName(u));
 	}
 }

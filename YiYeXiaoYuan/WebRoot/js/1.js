@@ -10,25 +10,34 @@ var addcolor=function (num) {
 	for(var i=0;i<num;i++) {
 		$self.find('.information-people>span:eq(' + i + ')').addClass('add-color');
 	}
-};//添加已有拼车人数
-var fresh_page=function () {
-	var chooseTime=$('#rili-date').val();
-	$.ajax({
-		method:'GET',
-		url:'',
-		data:{'chooseTime':chooseTime},//strings
-		dataType:'json',
-		success:function (data) {
+};
+//添加已有拼车人数
+ var fresh_page=function () {
+ 	var chooseTime=$('#rili-date').val();
+ 	$.ajax({
+ 		method:'GET',
+ 		url:'',
+ 		data:{'chooseTime':chooseTime},//strings
+ 		dataType:'json',
+ 		success:function (data) {
 
-		},
-		error:function () {
+ 		},
+ 		error:function () {
 
-		}
-	});//拿到所选时间下的数据
+ 		}
+ 	});//拿到所选时间下的数据
 
 };
-$(window).ready(function() {
-
+$(window).ready(function(){
+	var usr_id=window.sessionStorage.getItem('usr_id');//取id
+//用户头像click
+	$('#user1').on('tap click',function () {
+		if(usr_id!=null){
+			window.location.href='myRoute.html';
+		}else{
+			window.location.href='login.html';
+		}
+	});
 //日历处理
 	function GetDateStr(){
 		var dd = new Date();
@@ -70,25 +79,21 @@ $(window).ready(function() {
 
 		}
 
-	});
-
-	//By yzy
-
-	var nowTime=$("#rili-date").attr("placeholder");
-	$.ajax({
-		method:'GET',
-		url:'',
-		data: {'nowTime':nowTime},
-		dataType:'json',//
-		success:function (data) {
-			//填入新的三组数据
-		},
-		error:function () {
-			console.log('fresh 3 wrong');
+	})		//真爱弹窗	
+	sessionStorage.setItem("timer",true);
+	$("#rili-date").change(function(){
+		var $date=$('#rili-date').val();
+		var $arr=['2017-01-13','2017-01-14','2017-01-15','2017-01-16'];
+		var timer=sessionStorage.getItem('timer');
+		for(var i=0;i<$arr.length;++i){
+				if(($arr[i]==$date)&&(timer=="true")){
+					$('#dialog-love').fadeIn(300);
+					sessionStorage.setItem("timer",false)
+				}
 		}
-	});//刷新或首次进入界面的 更新三组拼车数据请求
+		});
 
-	//报名按钮事件
+	//报名按钮事件 yzy
 	$('.issue-btn').on('click tap', function () {
 		var that = $(this);
 		$("#dialog-confirm").css("display", "block");//弹窗提示
@@ -98,19 +103,19 @@ $(window).ready(function() {
 				$('#dialog-error').fadeIn(300);
 				setTimeout(function () {
 					$('#dialog-error').fadeOut(300);
-				},3000);
+				},2000);
 			};//不合报名规则
 			var enlist_success=function () {
 				$('#dialog-success').fadeIn(300);
 				setTimeout(function () {
 					$('#dialog-success').fadeOut(300);
-				},3000);
+					window.location.href='myRoute.html';
+				},2000);
 			};//报名成功提示
 
 			//console.log(get_enlist_startTime()[2]);
-			if(/*logined*/ 1==0){
+			if(usr_id!=null){
 				$.ajax({
-					//检验是否符合报名规则 返回出发地点和出发时间(20161102)和出发具体时间(max_startTime_hour)
 					method:'post',
 					url:'',
 					data:{
@@ -131,6 +136,7 @@ $(window).ready(function() {
 								that.css("background-color", "#000000");
 								that.attr('disabled','disabled');
 								that.html('已报名');
+								window.location.href='myRoute.html';
 								break;
 							case '00': enlist_error(); break;
 							case '01':enlist_success();
@@ -142,7 +148,12 @@ $(window).ready(function() {
 						}
 					},
 					error:function () {
-						console.log('net wrong -1');
+						//console.log('net wrong -1');
+						enlist_success();
+						that.css("background-color", "#000000");
+						that.attr('disabled','disabled');
+						that.html('已报名');
+
 					}
 				});
 			} else{
@@ -151,7 +162,7 @@ $(window).ready(function() {
 				$('#dialog-login').fadeIn(300);
 				setTimeout(function () {
 					location.href='login.html';
-				},3000)
+				},2000)
 			}
 
 
@@ -167,14 +178,16 @@ $(window).ready(function() {
 	});
 	//选择日期之后的事件处理
 
-
-
-
-
-
-
-
+		//真爱跳转
+	$('#trueLove').on('click tap',function(){window.location.href ='trueLove-bus.html'})
+	
+	$("#dialog-love span:eq(0)").on("tap click",function(){
+		$("#dialog-love").css("display", "none");
+	});
+	$("#dialog-love span:eq(1)").on("tap click",function(){
+		window.location.href='trueLove-bus.html';
+	});
+	
+	
 });
-
-//ready function
 

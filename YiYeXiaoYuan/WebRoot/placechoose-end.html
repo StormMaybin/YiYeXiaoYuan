@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  		<title>一页校园</title>
+   		<link href="css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="css/navbar.css" rel="stylesheet"/>
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/bootstrap.min.js"></script>		
+		<script>
+		$(function(){
+			$("#set-button").click(
+				function(){
+				var whereEnd=$("#input-where-end").val();
+				localStorage.setItem("whereEnd",whereEnd);
+				window.location.href ='发起新拼车.html';
+			});
+			var arr=$(".choose-where").children("div");
+			var cc= new Array;
+			    arr.each(function(index){
+			 		$(this).last().click(
+		  	 			function(){
+		 			 		cc[index]=$(this).text();
+		 			 		localStorage.setItem("whereEnd",cc[index]);
+		 			 		window.location.href ='发起新拼车.html';
+		 			 		//console.log(bb[index])
+		 			})
+			 		})
+		})
+		</script>
+	</head>
+	<body>
+		<div class="navigation1">
+			<a href="登陆.html"><span class="glyphicon glyphicon-user" id="user1"></span></a>
+			<a href="javascript:history.go(-1)"><span class="glyphicon glyphicon-chevron-left one-left"></span></a>
+		</div>
+		<div class="one-inner-2">
+			<div class="form2">
+			<div id="abc" class="choose-where row">
+				<div class="col-xs-6"><a role="button" class="btn btn-block">西电南校区</a></div>
+  				<div class="col-xs-6"><a role="button" class="btn btn-block">西电北校区</a></div>
+  				<div class="col-xs-6"><a role="button" class="btn btn-block">西安火车站</a></div>
+  				<div class="col-xs-6"><a role="button" class="btn btn-block">咸阳国际机场</a></div>
+  				<div class="col-xs-6"><a role="button" class="btn btn-block">航天城地铁站</a></div>
+  				<div class="col-xs-6"><a role="button" class="btn btn-block">韦曲南地铁站</a></div>
+  				<div class="col-xs-6"><a role="button" class="btn btn-block">西安北站</a></div>
+  				<div class="col-xs-6"><a role="button" class="btn btn-block">西安南站</a></div>
+			</div>
+			</div>
+			<div class="set-where">
+				<input type="text" id="input-where-end" value="" placeholder="上面没有？输入拼车地点" />
+				<button id="set-button" class="btn btn-block">确定新地点</button>
+			</div>
+		</div>
+	</body>
+</html>

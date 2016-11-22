@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  		<title>一页校园</title>
+   		<link href="css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="css/navbar.css" rel="stylesheet"/>
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script>
+			$(function(){
+				$('#pc-success').on('click tap', function () {
+//					console.log(pcSuccess);
+					$('#pc-fail').toggle(500);
+				});
+				var pcSuccess=$('#pc-success').val();
+				$('#pc-fail').on('click tap',function(){
+					$('#pc-success').val($('#pc-fail').text());
+					$(this).text(pcSuccess);
+					$(this).hide();
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<div class="navigation1">
+			<a href="javascript:history.go(-1)"><span class="glyphicon glyphicon-chevron-left one-left"></span></a>
+		</div>
+		<div class="one-inner-2">
+			<form action="#"  method="get"  role="form">
+			<div class="peofankui">
+				<ul class="list-unstyled">
+					<li>
+						<span class="glyphicon glyphicon-user people-applied"></span>
+						<p id="pelTel-id">西电硕爸爸</p>
+						<p>手机:&nbsp;<span id="pelTel-tel">18629474183</span></p>
+						<p>QQ:&nbsp;<span id="pelTel-qq">596927571</span></p>
+						<select>
+						  <option value="1">正常</option>
+						  <option value="2">迟到</option>
+						  <option value="3">爽约</option>
+						</select>
+					</li>
+					<li>
+						<p>西电硕爸爸</p>
+						<p>手机:&nbsp;<span>18629474183</span></p>
+						<p>QQ:&nbsp;<span>596927571</span></p>
+						<select class="selectpicker">
+						  <option value="1">正常</option>
+						  <option value="2">迟到</option>
+						  <option value="3">爽约</option>
+						</select>
+					</li>
+					<li>
+						<p>西电硕爸爸</p>
+						<p>手机:&nbsp;<span>18629474183</span></p>
+						<p>QQ:&nbsp;<span>596927571</span></p>
+						<select>
+						  <option value="1">正常</option>
+						  <option value="2">迟到</option>
+						  <option value="3">爽约</option>
+						</select>
+					</li>
+				</ul>
+			</div>
+				<div class="is-success">
+					<span>本次拼车是否成功</span>
+					<input type="text" id="pc-success" value="成功" readonly="true"/><span id="pc-caret" class="caret"></span>
+					<span id="pc-fail">失败</span>
+				</div>
+				<textarea id="pc-infor" rows="5" placeholder="&ensp;&ensp;&ensp;&ensp;谢谢您的支持与耐心反馈，我们将给西电的同学带来更多更好的服务。如果您对本次拼车或者我们的网站有什么建议可以在此输入。"></textarea>
+				<input type="submit" id="pc-submit" value="确认提交" />
+			</form>
+		</div>
+	</body>
+</html>

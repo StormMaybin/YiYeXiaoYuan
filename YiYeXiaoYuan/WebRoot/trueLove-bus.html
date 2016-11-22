@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  		<title>一页校园</title>
+  		<link href="css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="css/navbar.css" rel="stylesheet"/>
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/lovebus.js"></script>
+	</head>
+	<body>
+		<div class="navigation1">
+			<span class="navigation-title">一页校园</span>
+			<a href="javascript:history.go(-1)"><span class="glyphicon glyphicon-chevron-left one-left"></span></a>
+		</div>
+		<div class="one-inner">
+			<form action="#" id="love-form" role="form">
+				<div class="love-where">
+					<p>选择目的地:</p>
+					<p>西安火车站<span>(25元)</span><input type="radio" value="西安火车站" name="where" required/></p>
+					<p>咸阳国际机场<span>(40元)</span><input type="radio" value="咸阳国际机场" name="where" required/></p>
+				</div>
+				<div class="love-date">
+					<p>选择日期:</p>
+					<p><span>2017-1-13</span><input type="radio" name="date" value="2017-1-13" required/><span>2017-1-14</span><input type="radio" name="date" value="2017-1-14" required/></p>
+					<p><span>2017-1-15</span><input type="radio" name="date" value="2017-1-15" required/><span>2017-1-16</span><input type="radio" name="date" value="2017-1-16" required/></p>
+				</div>
+				<div class="love-time">
+					<p>选择时间:</p>
+					<p><span>10:00</span><input type="radio" name="time" value="10:00" required/><span>12:00</span><input type="radio" name="time" value="12:00" required/></p>
+					<p><span>14:00</span><input type="radio" name="time" value="14:00" required/><span>16:00</span><input type="radio" name="time" value="16:00" required/></p>
+				</div>
+				<div class="love-text">
+					<input type="text" id="love-name" placeholder="请输入您的姓名" required/>
+					<input type="text" id="love-sushe" placeholder="宿舍:竹园一号楼1区101" required/>
+				<h5 id="love-beizhu">为了让车票早日到达您手中，请正确填写~</h2>
+				<input type="submit" class="issue-btn" id="love-sub" value="确认报名" />
+				</div>
+			</form>
+		</div>
+   <div class="one-dialog" id="dialog-confirm">
+        <div class="dialog-inner">
+            <span>确定报名？</span>
+        </div>
+        <div class="dialog-btn btn-group">
+            <a class="btn" role="button">是</a>
+            <a class="btn" role="button">否</a>
+        </div>
+    </div><!--弹窗 是否确认报名-->
+    <div class="one-dialog" id="dialog-login">
+        <p>请先登录您的账号</p>
+        <p>正在跳转至登录界面</p>
+        <img src="img/loading.gif"/>
+    </div><!--未登录弹窗-->
+    <div class="one-dialog" id="dialog-success">
+        <div class="dialog-inner">
+            <span>报名成功。</span>
+            <span>在我的行程查看拼车信息</span>
+        </div>
+    </div><!--弹窗报名成功-->
+    <div class="one-dialog" id="dialog-error">
+        <div class="dialog-inner">
+            <span>开始新的拼车前请取消已有拼车</span>
+        </div>
+    </div><!--弹窗报名之前请取消已有报名-->
+    <div class="one-dialog" id="dialog-radio">
+    	<p></p>
+		<p>请完善信息</p>
+	</div>
+	</body>
+</html>
