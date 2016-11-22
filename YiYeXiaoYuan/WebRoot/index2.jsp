@@ -10,6 +10,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +29,12 @@
 <script src="http://cdn.amazeui.org/amazeui/2.5.0/js/amazeui.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/1.js"></script>
-
 <c:if test="${list == null }">
 	<jsp:forward page="servlet/IndexServlet"></jsp:forward>
 </c:if>
 <script type="text/javascript">
-	var length = "${fn:length(list)}";
-	//alert(length);
+    var length = "${fn:length(list)}";
+    //alert(length);
 </script>
 </head>
 <body>
@@ -42,20 +42,21 @@
 		<span class="glyphicon glyphicon-user" id="user1"></span>
 	</div>
 	<div class="one-inner">
-
-		<div class="one-faqi">
-			<a href="newCar.html" role="button" class="btn btn-block">发起新的拼车</a>
-		</div>
-		<div class="one-datechoose">
-			<label class="one-choose" for="rili-date"><span
-				class="glyphicon glyphicon-chevron-right"></span> </label> <input
-				type="text" class="one-date" id="rili-date" onchange="fresh_page()"
-				readonly />
-		</div>
-
-		<c:forEach items="${list}" var="li">
-			<div id="wrapper">
-				<ul class="list-unstyled">
+		<div id="wrapper">
+			<ul class="list-unstyled">
+				<li>
+					<div class="one-faqi" id="one-faqi">
+						<a href="newCar.html" role="button" class="btn btn-block">发起新的拼车</a>
+					</div>
+					<div class="one-datechoose">
+						<label class="one-choose" for="rili-date"><span
+							class="glyphicon glyphicon-chevron-right"></span> </label> <input
+							type="text" class="one-date" id="rili-date"
+							onchange="fresh_page()" readonly />
+					</div>
+					<div id="trueLove"></div>
+				</li>
+				<c:forEach items="${list}" var="li">
 					<li>
 						<div class="one-information">
 							<div class="information-time">
@@ -102,12 +103,13 @@
 								<button href="#" role=button
 									class="issue-btn btn btn-block sign-btn">报名</button>
 							</div>
-						</div> <!--拼车数据1-->
+						</div> <!--拼车数据1--> <!--拼车数据1-->
 					</li>
-					
-				</ul>
-			</div>
-		</c:forEach>
+				</c:forEach>
+			</ul>
+
+
+		</div>
 		<div class="one-dialog" id="dialog-confirm">
 			<div class="dialog-inner">
 				<span>确定报名？</span>
@@ -147,63 +149,64 @@
 		</div>
 	</div>
 	<script>
-		var ticker = 0;//计算完整循环复制次数
-		var ticker2 = 0;//阻止多次刷新
-		refresher.init({
-			id : "wrapper",//<------------------------------------------------------------------------------------┐
-			pullDownAction : Refresh,
-			pullUpAction : Load
+    var ticker=0;//计算完整循环复制次数
+    var ticker2=0;//阻止多次刷新
+    refresher.init({
+        id:"wrapper",//<------------------------------------------------------------------------------------┐
+        pullDownAction:Refresh,
+        pullUpAction:Load
 
-		});
-		function Refresh() {
-			setTimeout(function() { // <-- Simulate network congestion, remove setTimeout from production!
-				//上拉刷新
-				$.ajax({
-					type : 'get',
-					url : 'servlet/IndexServlet',
-					data : {
-						'status' : '1'
-					},
-					success : function() {
-						window.location.reload();
-						return true;
-					},
-					error : function() {
-						console.log('net wrong');
-					}
-				});
-				wrapper.refresh();
-				/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+    });
+    function Refresh() {
+        setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+            //上拉刷新
+            $.ajax({
+                type:'get',
+                url:'servlet/IndexServlet',
+                data:{'status':'1'},
+                success:function(){
+                    window.location.reload();
+                    return true;
+                },
+                error:function () {
+                    console.log('net wrong');
+                }
+            });
+            wrapper.refresh();/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
 
-			}, 1000);
+        }, 1000);
 
-		}
+    }
 
-		function Load() {
-			setTimeout(function() {// <-- Simulate network congestion, remove setTimeout from production!
-				//上拉加载更多数据
-				//函数写这里
-				for ( var i = 0; i <= 9; i++) {
-					if (ticker * 10 + i + 4 > length || ticker2 == 1) {
-						//没有更多数据
-						$('#dialog-error2').fadeIn(300);
-						setTimeout(function() {
-							$('#dialog-error2').fadeOut(300);
-						}, 2000);
-						ticker2 = 1;
-						wrapper.refresh();
-						return false;
-					} else {
-						$('.list-unstyled').append(
-								$('.list-unstyled>li:eq(0)').clone(true));
-					}
-				}
-				ticker += 1;
-				wrapper.refresh();
-				/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+    function Load() {
+        setTimeout(function () {// <-- Simulate network congestion, remove setTimeout from production!
+            //上拉加载更多数据
+            //函数写这里
+/*             for(var i=0;i<=9;i++) {
+                if(ticker*10+i+1>length||ticker2==1){
+                    //没有更多数据
+                    $('#dialog-error2').fadeIn(300);
+                    setTimeout(function () {
+                        $('#dialog-error2').fadeOut(300);
+                    },2000);
+                    ticker2=1;
+                    wrapper.refresh();
+                    return false;
+                }else {
+                    $('.list-unstyled').append($('.list-unstyled>li:eq(1)').clone(true));
+                }
+            }
+            ticker+=1; */
+            wrapper.refresh();
+            /****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
 
-			}, 0);
-		}
-	</script>
+        }, 0);
+
+    }
+
+
+</script>
+	<script>
+</script>
 </body>
 </html>

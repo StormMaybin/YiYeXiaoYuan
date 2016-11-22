@@ -25,6 +25,21 @@
     <servlet-name>ValidateServlet</servlet-name>
     <servlet-class>com.yiyexiaoyuan.web.controller.ValidateServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ResetPassWordServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.ResetPassWordServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AlterPassWordServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.AlterPassWordServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SetQQServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.SetQQServlet</servlet-class>
+  </servlet>
+
+
+
 
 
 
@@ -49,6 +64,18 @@
   <servlet-mapping>
     <servlet-name>ValidateServlet</servlet-name>
     <url-pattern>/servlet/ValidateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ResetPassWordServlet</servlet-name>
+    <url-pattern>/servlet/ResetPassWordServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AlterPassWordServlet</servlet-name>
+    <url-pattern>/servlet/AlterPassWordServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SetQQServlet</servlet-name>
+    <url-pattern>/servlet/SetQQServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

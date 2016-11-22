@@ -68,7 +68,7 @@ public interface UserDao
 	 * @return void
 	 * @param u
 	 */
-	public abstract void updateQq(User paramUser);
+	public abstract boolean updateQq(User paramUser);
 
 	/**
 	 * method 8 查询是否可以修改用户名

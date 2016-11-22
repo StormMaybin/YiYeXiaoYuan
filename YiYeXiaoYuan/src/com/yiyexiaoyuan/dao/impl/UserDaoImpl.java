@@ -32,8 +32,9 @@ public class UserDaoImpl implements UserDao
 			stat.setString(1, ServiceUtils.md5(u.getPassWord()));
 			stat.setString(2, u.getMobile());
 			// 执行操作
-			return stat.execute();
-		} catch (Exception e)
+			return stat.executeUpdate() == 1;
+		} 
+		catch (Exception e)
 		{
 			// 异常转型
 			throw new RuntimeException(e);
@@ -244,7 +245,8 @@ public class UserDaoImpl implements UserDao
 
 			// 执行操作
 			return stat.executeUpdate() == 1;
-		} catch (SQLException e)
+		} 
+		catch (SQLException e)
 		{
 			// 异常转型
 			throw new RuntimeException(e);
@@ -263,7 +265,7 @@ public class UserDaoImpl implements UserDao
 	 * @return void
 	 * @param u
 	 */
-	public void updateQq(User u)
+	public boolean updateQq(User u)
 	{
 		Connection conn = null;
 		PreparedStatement stat = null;
@@ -278,8 +280,9 @@ public class UserDaoImpl implements UserDao
 			stat.setString(2, u.getMobile());
 
 			// 执行数据库操作
-			stat.executeUpdate();
-		} catch (SQLException e)
+			return stat.executeUpdate() == 1;
+		} 
+		catch (SQLException e)
 		{
 			// 异常转型
 			throw new RuntimeException(e);

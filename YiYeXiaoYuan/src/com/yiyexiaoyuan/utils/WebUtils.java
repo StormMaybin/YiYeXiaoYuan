@@ -52,6 +52,12 @@ public class WebUtils
 		}
 		return bean;
 	}
+	/**
+	 * 拷贝bean
+	 * @author StormMaybin
+	 * @param src
+	 * @param dest
+	 */
 	public static void copyBean (Object src, Object dest)
 	{
 		//注册转换器
@@ -90,7 +96,8 @@ public class WebUtils
 		{
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
-		} catch (InvocationTargetException e)
+		} 
+		catch (InvocationTargetException e)
 		{
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e);

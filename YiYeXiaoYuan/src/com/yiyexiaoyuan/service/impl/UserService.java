@@ -20,16 +20,16 @@ public class UserService
 	 * @param u
 	 * @throws UserExitException
 	 */
-	public void registerService(User u) throws UserExitException
+	public boolean registerService(User u) throws UserExitException
 	{
 		//如果这个 手机号码已经注册就不能继续注册
-		if (this.userDao.findByMobile(u.getMobile()) != null)
+		if (userDao.findByMobile(u.getMobile()) != null)
 		{
 			//抛出用户已存在异常
 			throw new UserExitException();
 		}
 		//添加用户
-		this.userDao.add(u);
+		return userDao.add(u);
 	}
 	/**
 	 * 为web层提供登录的服务
@@ -92,10 +92,10 @@ public class UserService
 	 * 为web层提供添加qq信息的服务
 	 * @param u
 	 */
-	public void updateQqService(User u)
+	public boolean updateQqService(User u)
 	{
 		//调用dao层实现
-		this.userDao.updateQq(u);
+		return this.userDao.updateQq(u);
 	}
 	/**
 	 * 判断手机号码是否已存在
