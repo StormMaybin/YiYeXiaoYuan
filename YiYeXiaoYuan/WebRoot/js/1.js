@@ -29,7 +29,7 @@ var addcolor=function (num) {
 
 };
 $(window).ready(function(){
-	var usr_id=window.sessionStorage.getItem('usr_id');//取id
+	var usr_id=window.sessionStorage.getItem('userName');//取id
 //用户头像click
 	$('#user1').on('tap click',function () {
 		if(usr_id!=null){

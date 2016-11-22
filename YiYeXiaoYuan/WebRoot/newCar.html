@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  		<title>一页校园</title>
+   		<link href="css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="css/navbar.css" rel="stylesheet"/>
+		<link href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet" />
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="http://cdn.amazeui.org/amazeui/2.5.0/js/amazeui.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+			<script src="js/NewCar.js"></script>
+	</head>
+	<body>
+		<div class="navigation1">
+			<span class="glyphicon glyphicon-user" id="user1"></span>
+			<a href="index.html"><span class="glyphicon glyphicon-chevron-left one-left"></span></a>
+		</div>
+		<div class="one-inner-2">
+			<div class="information-form-fache">
+				<form action="#" method="get"  role="form">
+					<div class="form1">
+					<div class="form-fache-where">
+						<a href="placechoose-start.html" id="where-start" class="btn btn-block fache-start" role="button">start</a>
+						<span class="glyphicon glyphicon-transfer fache-replace"></span>
+						<a href="placechoose-end.html" id="where-end" class="btn btn-block fache-end" role="button">end</a>
+					</div>
+					<div class="form-datechoose">
+						<label class="form-choose" for="one-date"><span  class="glyphicon glyphicon-chevron-right"></span></label>
+						<p><input type="text" class="am-form-field" id="one-date" placeholder="请选择日期"  readonly/></p>
+					</div>
+					<div class="form-fache-time">
+						<input id="startTime_min_hour" type="number"  min="0" max="23" value="00"  oninput="if(value.length>2)value=value.slice(0,2)" />&nbsp;
+						<input id="startTime_min_min" type="number"  min="0" max="59" value="00"  oninput="if(value.length>2)value=value.slice(0,2)"/>
+						&nbsp;&nbsp;<span>至</span>&nbsp;&nbsp;<!--添加了ID-->
+						<input id="startTime_max_hour" type="number"  min="0" max="23" value="23"  oninput="if(value.length>2)value=value.slice(0,2)"/>&nbsp;
+						<input id="startTime_max_min" type="number"  min="0" max="59" value="59"  oninput="if(value.length>2)value=value.slice(0,2)"/>
+					</div>
+					</div>
+					<div class="form1">
+					<div class="form-fache-peo">
+						<span>拼车人数上限</span>&nbsp;
+						<input id='maxMember' type="number"  min="0" max="50" oninput="if(value.length>2)value=value.slice(0,2)"/>
+						&nbsp;&nbsp;<span>还需要人数</span>&nbsp;
+						<input id='curtMember' type="number"  min="0" max="10" oninput="if(value.length>2)value=value.slice(0,2)"/>
+					</div>
+					<div class="fache-beizhu">
+						<input id='message' type="text" minlength="0" maxlength="18" placeholder="备注或要求:18字内请勿填写手机信息,防止信息泄露" />
+					</div>
+					</div>
+					<div class="fache-submit">
+						<input type="submit" class="btn btn-block" id="start_btn" value="确定发起新拼车"/>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="one-dialog" id="dialog-login">
+			<p>请先登录您的账号</p>
+			<p>正在跳转至登录界面</p>
+			<img src="img/loading.gif"/>
+		</div><!--未登录弹窗-->
+		<div class="one-dialog" id="dialog-check">
+			<p>手机,QQ等私人信息</p>
+			<p>请勿泄露</p>
+		</div><!--message wrong-->
+		<div class="one-dialog" id="dialog-error">
+			<p>内容填写不全或有误</p>
+			<p>请重新填写</p>
+		</div><!--content wrong-->
+		<div class="one-dialog" id="dialog-error2">
+			<p>最大人数</p>
+			<p>不能超过6人</p>
+		</div><!--最大人数错误-->
+	</body>
+</html>

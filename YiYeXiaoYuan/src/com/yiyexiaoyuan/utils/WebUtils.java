@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 
-import javax.management.RuntimeErrorException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
@@ -17,15 +16,17 @@ public class WebUtils
 {
 	public static <T> T request2Bean (HttpServletRequest request, Class<T> beanClass)
 	{
-		//创建要封装的bean
+		
 		T bean = null;
 		try
 		{
-			bean = beanClass.newInstance();
-			//request数据封装到bean
 			Enumeration e = request.getParameterNames();
+			//创建要封装的bean
+			bean = beanClass.newInstance();
 			while (e.hasMoreElements())
 			{
+				System.out.println("循环");
+				//request数据封装到bean
 				String name = (String) e.nextElement();
 				String value = request.getParameter(name);
 				try
@@ -34,7 +35,7 @@ public class WebUtils
 				} 
 				catch (InvocationTargetException e1)
 				{
-					// TODO Auto-generated catch block
+					// 异常转型
 					throw new RuntimeException(e1);
 				}
 			}
@@ -43,7 +44,8 @@ public class WebUtils
 		{
 			// 异常转型
 			throw new RuntimeException(e);
-		} catch (IllegalAccessException e)
+		} 
+		catch (IllegalAccessException e)
 		{
 			// 异常转型
 			throw new RuntimeException(e);
@@ -72,9 +74,10 @@ public class WebUtils
 				try
 				{
 					return sdf.parse(string);
-				} catch (ParseException e)
+				} 
+				catch (ParseException e)
 				{
-					// TODO Auto-generated catch block
+					// 异常转型
 					throw new RuntimeException(e);
 				}
 			}

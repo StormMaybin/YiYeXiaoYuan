@@ -1,9 +1,14 @@
 package com.yiyexiaoyuan.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Information implements Comparable<Information>
+public class Information implements Comparable<Information> , Serializable 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//拼车信息id
 	private int id;
 	//用户id
@@ -138,11 +143,11 @@ public class Information implements Comparable<Information>
 	{
 		if (this.getPubTime().getTime() > o.getPubTime().getTime())
 		{
-			return 1;
+			return -1;
 		}
 		else if (this.getPubTime().getTime() < o.getPubTime().getTime())
 		{
-			return -1;
+			return 1;
 		}
 		else
 		{

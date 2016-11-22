@@ -334,4 +334,42 @@ public class UserDaoImpl implements UserDao
 		}
 		return false;
 	}
+	/**
+	 * method 9
+	 * 根据用户名查找用户的id
+	 * @author StormMaybin
+	 * @param userName
+	 * @return int
+	 */
+	public int queryUIdByUserName (String userName)
+	{
+		Connection conn = null;
+		PreparedStatement stat = null;
+		ResultSet result = null;
+		
+		conn = DBUtil.getConnection();
+		try
+		{
+			stat = conn.prepareStatement("SELECT id FROM user WHERE userName = ?");
+			//设置参数
+			stat.setString(1, userName);
+			result = stat.executeQuery();
+				
+			while (result.next())
+			{
+				return result.getInt("id");
+			}
+		} 
+		catch (SQLException e)
+		{
+			// 异常转型
+			throw new RuntimeException(e);
+		}
+		finally
+		{
+			//关闭资源
+			DBUtil.closeConnection(conn, stat, result);
+		}
+		return 0;
+	}
 }

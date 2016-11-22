@@ -114,4 +114,20 @@ public class UserDaoTest
 		
 		System.out.println(udao.isCanUpdateUserName(u));
 	}
+	//根据用户名查找用户的id
+	@Test
+	public void queryUIdByUserNameTest ()
+	{
+		String userName = "StormMa";
+		UserDao udao = new UserDaoImpl();
+		int uId = udao.queryUIdByUserName(userName);
+		if (uId != 0)
+		{
+			System.out.println("用户id是: "+uId);
+		}
+		else
+		{
+			System.out.println("无此用户名");
+		}
+	}
 }

@@ -3,7 +3,7 @@ package com.yiyexiaoyuan.formbean;
 public class RegisterForm 
 {
 	private String mobile;
-	private String checkCode;
+	private String passWord;
 	public String getMobile()
 	{
 		return mobile;
@@ -12,13 +12,13 @@ public class RegisterForm
 	{
 		this.mobile = mobile;
 	}
-	public String getCheckCode()
+	public String getPassWord()
 	{
-		return checkCode;
+		return passWord;
 	}
-	public void setCheckCode(String checkCode)
+	public void setPassWord(String passWord)
 	{
-		this.checkCode = checkCode;
+		this.passWord = passWord;
 	}
 	public boolean checked ()
 	{

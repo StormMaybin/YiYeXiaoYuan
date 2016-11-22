@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.yiyexiaoyuan.domain.User;
+import com.yiyexiaoyuan.exception.UserExitException;
 import com.yiyexiaoyuan.formbean.RegisterForm;
+import com.yiyexiaoyuan.service.impl.UserService;
 import com.yiyexiaoyuan.utils.WebUtils;
 
 public class RegisterServlet extends HttpServlet 
@@ -21,19 +24,41 @@ public class RegisterServlet extends HttpServlet
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException 
 	{
+		System.out.println("开始");
 		doPost(request, response);
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException 
 	{
 		request.setCharacterEncoding("UTF-8");
-		//对表单提交的数据进行合法性校验
+		UserService service = null;
+		
+		//把request传过来的值封装成formBean
 		RegisterForm form = WebUtils.request2Bean(request, RegisterForm.class);
-		//如果校验失败，跳转表单页，回显错误信息，错误封装到一个对象中
 		
-		//如果校验成功，调用服务进行注册
-		
-		//
+		//如果传进来的值是正确的
+		if (form != null && form.getMobile() != null && form.getPassWord() != null)
+		{
+			//拷贝bean
+			//RegisterBean to UserBean
+			User user = new User();
+			WebUtils.copyBean(form, user);
+			
+			if (user.getMobile() != null && user.getPassWord() != null)
+			{
+				//开始注册
+				try
+				{
+					service.registerService(user);
+				} 
+				//注册手机号码已经存在不能注册
+				catch (UserExitException e)
+				{
+					// 处理手机号码已经存在的情况
+					e.printStackTrace();
+				}
+			}
+		}
 	}	
 
 }

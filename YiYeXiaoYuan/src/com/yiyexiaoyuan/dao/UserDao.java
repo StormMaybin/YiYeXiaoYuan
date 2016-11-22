@@ -78,4 +78,13 @@ public interface UserDao
 	 * @return boolean
 	 */
 	public abstract boolean isCanUpdateUserName(User u);
+	
+	/**
+	 * method 9
+	 * 根据用户名查找用户的id
+	 * @author StormMaybin
+	 * @param userName
+	 * @return int
+	 */
+	public abstract int queryUIdByUserName (String userName);
 }
