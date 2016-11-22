@@ -130,4 +130,21 @@ public class UserDaoTest
 			System.out.println("无此用户名");
 		}
 	}
+	//根据用户id查找用户信息测试
+	@Test
+	public void findById ()
+	{
+		User u = null;
+		UserDao udao = new UserDaoImpl();
+		
+		u = udao.findById(30);
+		if (u != null)
+		{
+			System.out.println(u);
+		}
+		else
+		{
+			System.out.println("无此用户信息");
+		}
+	}
 }

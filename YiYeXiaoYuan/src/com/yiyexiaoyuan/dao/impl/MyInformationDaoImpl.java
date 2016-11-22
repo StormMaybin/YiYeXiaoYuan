@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.yiyexiaoyuan.dao.MyInformationDao;
 import com.yiyexiaoyuan.domain.Information;
 import com.yiyexiaoyuan.utils.DBUtil;
 
-public class MyInformationDaoImpl
+public class MyInformationDaoImpl implements MyInformationDao
 {
 	/**
 	 * 按照用户id查找他的所有行程信息

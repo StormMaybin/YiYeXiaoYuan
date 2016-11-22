@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import com.yiyexiaoyuan.dao.MyInformationDao;
 import com.yiyexiaoyuan.dao.impl.MyInformationDaoImpl;
 import com.yiyexiaoyuan.domain.Information;
 
@@ -12,7 +13,7 @@ public class MyInformationDaoTest
 	@Test
 	public void queryMyInformationTest()
 	{
-		MyInformationDaoImpl dao = new MyInformationDaoImpl();
+		MyInformationDao dao = new MyInformationDaoImpl();
 		
 		ArrayList<Information> list = null;
 		

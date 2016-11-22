@@ -87,4 +87,12 @@ public interface UserDao
 	 * @return int
 	 */
 	public abstract int queryUIdByUserName (String userName);
+	
+	/**
+	 * 根据用户id查找用户信息
+	 * @author StormMaybin
+	 * @param id
+	 * @return User
+	 */
+	public abstract User findById(int id);
 }

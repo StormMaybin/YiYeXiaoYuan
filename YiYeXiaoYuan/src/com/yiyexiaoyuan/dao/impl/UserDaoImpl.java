@@ -372,4 +372,52 @@ public class UserDaoImpl implements UserDao
 		}
 		return 0;
 	}
+	/**
+	 * 根据用户id查找用户信息
+	 * @author StormMaybin
+	 * @param id
+	 * @return User
+	 */
+	public User findById(int id)
+	{
+		Connection conn = null;
+		PreparedStatement stat = null;
+		ResultSet result = null;
+		User user = null;
+		conn = DBUtil.getConnection();
+		try
+		{
+			stat = conn.prepareStatement("SELECT * FROM user WHERE id = ?");
+			//设置参数
+			stat.setInt(1, id);
+			//执行查询
+			result = stat.executeQuery();
+			
+			while (result.next())
+			{
+				//创建User对象
+				user = new User();
+				// 封装数据到对象
+				user.setId(id);
+				user.setUserName(result.getString("userName"));
+				user.setQq(result.getString("qq"));
+				user.setPassWord(result.getString("passWord"));
+				user.setMobile(result.getString("mobile"));
+				user.setGoodApprise(result.getInt("goodApprise"));
+				user.setBadApprise(result.getInt("badApprise"));
+				user.setPassWordCount(result.getInt("passWordCount"));
+			}
+			return user;
+		} 
+		catch (SQLException e)
+		{
+			// 异常转型
+			throw new RuntimeException(e);
+		}
+		finally
+		{
+			//关闭资源
+			DBUtil.closeConnection(conn, stat, result);
+		}
+	}
 }
