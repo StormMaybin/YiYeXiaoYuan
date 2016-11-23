@@ -4,10 +4,13 @@ import com.yiyexiaoyuan.domain.Information;
 import com.yiyexiaoyuan.service.impl.InformationService;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class IndexServlet extends HttpServlet
 {
@@ -20,9 +23,18 @@ public class IndexServlet extends HttpServlet
 
 		ArrayList<Information> list = service.queryInformationService();
 		System.out.println(list.size());
-		request.getSession().setAttribute("list", list);
-
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+//		if (session.getAttribute("list") != null)
+//		{
+//			session.invalidate();
+//			request.getSession().setAttribute("list", list);
+//		}
+//		else
+//		{
+//			request.getSession().setAttribute("list", list);
+//		}
+		session.setAttribute("list", list);
+		return;
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

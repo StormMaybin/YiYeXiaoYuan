@@ -1,5 +1,6 @@
 package com.yiyexiaoyuan.web.controller;
 
+import com.yiyexiaoyuan.dao.impl.UserDaoImpl;
 import com.yiyexiaoyuan.domain.User;
 import com.yiyexiaoyuan.formbean.LoginForm;
 import com.yiyexiaoyuan.service.impl.UserService;
@@ -50,6 +51,17 @@ public class LoginServlet extends HttpServlet
 			System.out.println(user.toString());
 			json.accumulate("user", user);
 			json.accumulate("status", 1);
+			int isOk;
+			if (new UserDaoImpl().isCanUpdateUserName(user))
+			{
+				isOk = 0;
+			}
+			else
+			{
+				isOk = 1;
+			}
+			json.accumulate("nameChange", isOk);
+			System.out.println(isOk);
 			out.print(json.toString());
 			out.close();
 			return;

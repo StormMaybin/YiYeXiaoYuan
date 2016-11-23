@@ -188,6 +188,11 @@ $(window).ready(function(){
 		window.location.href='trueLove-bus.html';
 	});
 	
-	
+	//goTop
+	var $goTop=$('.scroller').css('transform').replace(/[^0-9\-,]/g,'').split(',');	
+	$('#goTop').on('tap click',function(){
+		$('.scroller').css('transform','matrix(1, 0, 0, 1, 0, -40)');
+	});
+
 });
 

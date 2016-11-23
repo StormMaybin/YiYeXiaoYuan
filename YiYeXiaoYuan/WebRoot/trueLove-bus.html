@@ -6,6 +6,7 @@
   		<title>一页校园</title>
   		<link href="css/bootstrap.min.css" rel="stylesheet"/>
 		<link href="css/navbar.css" rel="stylesheet"/>
+		<link href="css/radio.css" rel="stylesheet"/>
 		<script src="js/jquery-2.1.0.js"></script>
 		<script src="js/lovebus.js"></script>
 	</head>
@@ -18,20 +19,52 @@
 			<form action="#" id="love-form" role="form">
 				<div class="love-where">
 					<p>选择目的地:</p>
-					<p>西安火车站<span>(25元)</span><input type="radio" value="西安火车站" name="where" required/></p>
-					<p>咸阳国际机场<span>(40元)</span><input type="radio" value="咸阳国际机场" name="where" required/></p>
+					<p>西安火车站<span>(25元)</span><input type="radio" value="西安火车站" id="huoche" name="where" required/><label for="huoche"></label></p>
+					<p>咸阳国际机场<span>(40元)</span><input type="radio" value="咸阳国际机场" id="feiji" name="where" required/><label for="feiji"></label></p>
 				</div>
 				<div class="love-date">
 					<p>选择日期:</p>
-					<p><span>2017-1-13</span><input type="radio" name="date" value="2017-1-13" required/><span>2017-1-14</span><input type="radio" name="date" value="2017-1-14" required/></p>
-					<p><span>2017-1-15</span><input type="radio" name="date" value="2017-1-15" required/><span>2017-1-16</span><input type="radio" name="date" value="2017-1-16" required/></p>
+					<p>
+						<span>2017-1-13</span>
+						<input type="radio" id="date1" name="date" value="2017-1-13" required/>
+						<label  for="date1"></label>
+						<span>2017-1-14</span>
+						<input type="radio" id="date2" name="date" value="2017-1-14" required/>
+						<label for="date2"></label>
+					</p>
+					<p><span>2017-1-15</span>
+						<input type="radio" id="date3" name="date" value="2017-1-15" required/>
+						<label for="date3"></label>
+						<span>2017-1-16</span>
+						<input type="radio" id="date4" name="date" value="2017-1-16" required/>
+						<label for="date4"></label>
+					</p>
 				</div>
 				<div class="love-time">
 					<p>选择时间:</p>
-					<p><span>10:00</span><input type="radio" name="time" value="10:00" required/><span>12:00</span><input type="radio" name="time" value="12:00" required/></p>
-					<p><span>14:00</span><input type="radio" name="time" value="14:00" required/><span>16:00</span><input type="radio" name="time" value="16:00" required/></p>
+					<p>
+						<span id="xiugai">6:00</span>
+						<input type="radio" id="time1"  name="time" value="6:00" required/>
+						<label id="label1" for="time1"></label>
+						<span class="yingcang">10:00</span>
+						<input type="radio" id="time2"   name="time" value="10:00" required/>
+						<label for="time2" class="yingcang" ></label>
+					</p>
+					<p><span class="yingcang"> 14:00</span>
+						<input type="radio" id="time3"   name="time" value="14:00" required/>
+						<label class="yingcang" for="time3"></label>
+						<span class="yingcang">18:00</span>
+						<input type="radio" id="time4"   name="time" value="18:00" required/>
+						<label class="yingcang" for="time4"></label>
+					</p>
 				</div>
 				<div class="love-text">
+					<div class="chooseNumber">
+						<span id="jian"><img src="img/jian.svg"/></span>
+						<span id="numb"><input type="number" id="numb1" value="1" readonly="true"/>张</span>
+						<span id="jia"><img src="img/jia.svg"/></span>
+						<p id="tuan"><img src="img/tuan.svg"/>&ensp;&ensp;<span>满5人打9折</span></p>
+					</div>
 					<input type="text" id="love-name" placeholder="请输入您的姓名" required/>
 					<input type="text" id="love-sushe" placeholder="宿舍:竹园一号楼1区101" required/>
 				<h5 id="love-beizhu">为了让车票早日到达您手中，请正确填写~</h2>

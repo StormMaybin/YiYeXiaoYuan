@@ -34,6 +34,7 @@ a{color: #000;}
 	position: absolute;
 	top: 48px;
 	width: 100%;
+	height: 100%;
 
 }
 #start_txt{
@@ -82,7 +83,7 @@ input:-moz-placeholder { color:#bbb; }
 	display: none;
 	border-radius: 5px;
 	margin-left:-165px ;
-	background-image: url(../img/新年图2标.jpg);
+	background-image: url(../img/truelove2.jpg);
 	background-position: center;
 	background-repeat: no-repeat;
 	box-shadow: 0px 0px 0px 10000px rgba(0,0,0,.6);
@@ -150,8 +151,9 @@ input:-moz-placeholder { color:#bbb; }
 	font-size: 18px;
 	line-height: 33px;
 }
-input#rili-date{
+#rili-date{
 	width: 200px;
+	background-color: rgb(250,250,250);
 }
 .one-date{
 	position: relative;
@@ -254,6 +256,9 @@ input#rili-date{
 
 
 /*发起新拼车*/
+.chooseDd1,.chooseDd2{
+	display: none;
+}
 .one-left{
 	float: left;
 	margin-left: 10px;
@@ -389,33 +394,33 @@ input[type="number"]{-moz-appearance:textfield;}
 	width: 100%;
 	background-color: #fff;
 }
-.choose-where{
+.choose-where1,.choose-where2{
 	position: relative;
 	left: 10%;
 	width: 90%;
 	background-color: #fff;
 	text-align:center;
 }
-.choose-where>div:nth-child(odd){
+.choose-where1>div:nth-child(odd),.choose-where2>div:nth-child(odd){
 	border-right: 2px solid rgb(240,237,240);
 }
-.choose-where>div:nth-child(1),.choose-where>div:nth-child(2){
+.choose-where1>div:nth-child(1),.choose-where1>div:nth-child(2),.choose-where2>div:nth-child(1),.choose-where2>div:nth-child(2){
 	margin-top: 8px;
 	border-bottom: 2px solid rgb(240,237,240);
 }
-.choose-where>div:nth-child(3),.choose-where>div:nth-child(4){
+.choose-where1>div:nth-child(3),.choose-where1>div:nth-child(4),.choose-where2>div:nth-child(3),.choose-where2>div:nth-child(4){
 	border-bottom: 8px;
 	border-bottom: 2px solid rgb(240,237,240);
 }
-.choose-where>div:nth-child(5),.choose-where>div:nth-child(6){
+.choose-where1>div:nth-child(5),.choose-where1>div:nth-child(6),.choose-where2>div:nth-child(5),.choose-where2>div:nth-child(6){
 	//padding-top: 8px;
 	border-bottom: 2px solid rgb(240,237,240);
 }
-.choose-where>div>a{
+.choose-where1>div>a,.choose-where2>div>a{
 	color: #000000;
 	font-size: 15px;
 }
-.set-where{
+.set-where1,.set-where2{
 	border-top: 2px solid rgb(245,245,245);
 }
 #input-where-end,#input-where-start{
@@ -430,7 +435,7 @@ input[type="number"]{-moz-appearance:textfield;}
 	border-radius: 4px;
 	border: 1px solid rgb(211,211,211);
 }
-#set-button{
+#set-button1,#set-button2{
 	position: relative;
 	top: 28px;
 	left: 17%;
@@ -523,7 +528,7 @@ input[type="number"]{-moz-appearance:textfield;}
 	background-color: rgb(232,78,64);
 	color: #fff;
 }
-#zhuce-submit,#login-submit{
+#zhuce-submit,#login-submit,#login-get{
 	position: relative;
 	left: 5%;
 	top: 5px;
@@ -923,6 +928,7 @@ input[type="number"]{-moz-appearance:textfield;}
 	position: relative;
 	left: 6%;
 	width: 88%;
+	padding-bottom:20px ;
 	border-bottom: 2px solid rgb(180,180,180);
 }
 #love-form>div:last-child{
@@ -933,7 +939,7 @@ input[type="number"]{-moz-appearance:textfield;}
 	left: 6%;
 	margin-top: 14px;
 }
-.love-where input,.love-date>p:nth-child(2)>input:last-child,.love-date>p:nth-child(3)>input:last-child,.love-time>p:nth-child(2)>input:last-child,.love-time>p:nth-child(3)>input:last-child{
+.love-where input,.love-date>p:nth-child(2)>input:nth-child(5),.love-date>p:nth-child(3)>input:nth-child(5),.love-time>p:nth-child(2)>input:nth-child(5),.love-time>p:nth-child(3)>input:nth-child(5){
 	position: relative;
 	left: -15%;
 	float: right;
@@ -948,11 +954,11 @@ input[type="number"]{-moz-appearance:textfield;}
 .love-where>p:nth-child(3)>span{
 	left: 48%;
 }
-.love-date>p:nth-child(2)>span:nth-child(3),.love-date>p:nth-child(3)>span:nth-child(3){
+.love-date>p:nth-child(2)>span:nth-child(4),.love-date>p:nth-child(3)>span:nth-child(4){
 	position: absolute;
 	left: 48%;
 }
-.love-time>p:nth-child(2)>span:nth-child(3),.love-time>p:nth-child(3)>span:nth-child(3){
+.love-time>p:nth-child(2)>span:nth-child(4),.love-time>p:nth-child(3)>span:nth-child(4){
 	position: absolute;
 	left: 48%;	
 }
@@ -960,10 +966,55 @@ input[type="number"]{-moz-appearance:textfield;}
 	position: absolute;
 	left: 30%;	
 }
+/*radio*/
+input[type="radio"]{
+	display: none;
+}
+.love-where label,.love-date>p:nth-child(2)>label:last-child,.love-date>p:nth-child(3)>label:last-child,.love-time>p:nth-child(2)>label:last-child,.love-time>p:nth-child(3)>label:last-child{
+	position: relative;
+	left: -15%;
+	float: right;
+}
+.love-date>p:nth-child(2)>label:nth-child(3),.love-date>p:nth-child(3)>label:nth-child(3),.love-time>p:nth-child(2)>label:nth-child(3),.love-time>p:nth-child(3)>label:nth-child(3){
+	position: absolute;
+	left: 30%;
+}
+label.checked{
+	background: url(../img/gou.svg);
+}
+.love-time{
+	border: 0!important;
+}
 .love-text{
 	width: 100% !important;
 	left: 0!important;
 	height: auto;
+	border-top: 2px solid rgb(180,180,180)!important;
+	padding-top: 100px;
+	margin-bottom: 90px;
+}
+.chooseNumber{
+	height: 100px;
+	text-align: center;
+	margin-bottom: 60px;
+}
+#numb{
+margin: 10px 40px 0 40px;
+}
+#numb1{
+	border: 0;
+	height: 40px;
+	width: 40px;
+	text-align: center;
+	font-size: 24px;
+}
+#tuan{
+	margin: 20px 0;
+	font-size: 16px;
+}
+#tuan>span{
+	position: relative;
+	top: 2px;
 }
 #love-name{
 	position: relative;
@@ -988,7 +1039,7 @@ input[type="number"]{-moz-appearance:textfield;}
 	border: 1px solid rgb(189,189,189);
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
-	background-image: url(../img/宿舍管理.png);
+	background-image: url(../img/sushe.png);
 	background-position: 8px;
 	background-repeat: no-repeat;
 	text-align: center;
@@ -1039,4 +1090,25 @@ input[type=radio]{
 }
 .love-pinche b{
 	color: #000;
+}
+/*回到顶部*/
+#goTop{
+	position: fixed;
+	right: 30px;
+	bottom: 65px;
+	width: 42px;
+	height: 42px;
+	color: #fff;
+	font-size: 24px;
+	line-height: 40px;
+	text-align: center;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	border-radius: 2px;
+	background: rgba(232,78,64,.8);
+	box-shadow: 0px 0px 5px 5px rgba(232,78,64,1);
+	z-index: 999;
+/*	display: none;*/
+	transition:all ease-in-out .3s;
 }

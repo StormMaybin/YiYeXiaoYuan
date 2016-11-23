@@ -163,9 +163,10 @@
             $.ajax({
                 type:'get',
                 url:'servlet/IndexServlet',
+                ansyc: false,
                 data:{'status':'1'},
                 success:function(){
-                    window.location.reload();
+                    $('.one-inner').reload();
                     return true;
                 },
                 error:function () {
