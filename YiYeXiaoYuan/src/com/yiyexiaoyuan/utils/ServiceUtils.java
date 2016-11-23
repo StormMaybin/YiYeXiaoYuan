@@ -2,6 +2,10 @@ package com.yiyexiaoyuan.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 
 import sun.misc.BASE64Encoder;
 
@@ -23,6 +27,29 @@ public class ServiceUtils
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
 		}
-		
+	}
+	
+	private static JsonConfig getJsonConfig()
+	{
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.registerJsonValueProcessor(java.util.Date.class,
+				new JsonValueProcessor()
+				{
+					private SimpleDateFormat sd = new SimpleDateFormat(
+							"yyyy-MM-dd");
+
+					public Object processObjectValue(String key, Object value,
+							JsonConfig jsonConfig)
+					{
+						return value == null ? "" : sd.format(value);
+					}
+
+					public Object processArrayValue(Object value,
+							JsonConfig jsonConfig)
+					{
+						return null;
+					}
+				});
+		return jsonConfig;
 	}
 }

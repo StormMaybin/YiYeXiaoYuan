@@ -2,7 +2,7 @@ $(function(){
 		$('#love-sub').on('tap click',function(ev){
 		ev.preventDefault();
 //		var usr_id=window.sessionStorage.getItem('usr_id');
-		var num1=$('#love-number').val();
+		var n 
 		var radio1=	$('input:radio[name="where"]:checked').val();
 		var radio2=	$('input:radio[name="date"]:checked').val();
 		var radio3=	$('input:radio[name="time"]:checked').val();

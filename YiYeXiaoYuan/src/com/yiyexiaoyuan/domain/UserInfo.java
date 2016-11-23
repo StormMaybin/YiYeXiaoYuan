@@ -14,7 +14,7 @@ public class UserInfo
 	//用户购买票数
 	private int amount;
 	//出发日期
-	private Date startDate;
+	private java.util.Date startDate;
 	//出发时间
 	private String startTime;
 	//到达目的地
@@ -58,12 +58,12 @@ public class UserInfo
 		this.amount = amount;
 	}
 
-	public Date getStartDate()
+	public java.util.Date getStartDate()
 	{
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate)
+	public void setStartDate(java.util.Date startDate)
 	{
 		this.startDate = startDate;
 	}
