@@ -5,16 +5,13 @@ import java.util.ArrayList;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 import org.junit.Test;
 
 import com.yiyexiaoyuan.domain.Information;
-import com.yiyexiaoyuan.domain.UserInfo;
 import com.yiyexiaoyuan.service.impl.InformationService;
-import com.yiyexiaoyuan.service.impl.UserInfoService;
 
 public class jsonTest
 {
@@ -43,7 +40,8 @@ public class jsonTest
 		ArrayList<Information> list = service.queryInformationService();
 		
 		list = service.queryInformationService();
-		JSONArray json = new JSONArray().fromObject(list, jsonConfig);
+		new JSONArray();
+		JSONArray json = JSONArray.fromObject(list, jsonConfig);
 		System.out.println(json);
 	}
 

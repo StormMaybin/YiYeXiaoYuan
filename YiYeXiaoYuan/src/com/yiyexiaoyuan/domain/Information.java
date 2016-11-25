@@ -20,13 +20,13 @@ public class Information implements Comparable<Information> , Serializable
 	//到达地点
 	private String arrivePos;
 	//拼车下限时间小时值ֵ
-	private int startTime_min_hour;
+	private String startTime_min_hour;
 	//拼车下限时间分钟值ֵ
-	private int startTime_min_min;
+	private String startTime_min_min;
 	//拼车上限时间小时值ֵ
-	private int startTime_max_hour;
+	private String startTime_max_hour;
 	//拼车上限时间分钟值ֵ
-	private int startTime_max_min;
+	private String startTime_max_min;
 	//拼车最大人数
 	private int maxMember;
 	//拼车已有人数
@@ -75,35 +75,35 @@ public class Information implements Comparable<Information> , Serializable
 	{
 		this.arrivePos = arrivePos;
 	}
-	public int getStartTime_min_hour()
+	public String getStartTime_min_hour()
 	{
 		return startTime_min_hour;
 	}
-	public void setStartTime_min_hour(int startTime_min_hour)
+	public void setStartTime_min_hour(String startTime_min_hour)
 	{
 		this.startTime_min_hour = startTime_min_hour;
 	}
-	public int getStartTime_min_min()
+	public String getStartTime_min_min()
 	{
 		return startTime_min_min;
 	}
-	public void setStartTime_min_min(int startTime_min_min)
+	public void setStartTime_min_min(String startTime_min_min)
 	{
 		this.startTime_min_min = startTime_min_min;
 	}
-	public int getStartTime_max_hour()
+	public String getStartTime_max_hour()
 	{
 		return startTime_max_hour;
 	}
-	public void setStartTime_max_hour(int startTime_max_hour)
+	public void setStartTime_max_hour(String startTime_max_hour)
 	{
 		this.startTime_max_hour = startTime_max_hour;
 	}
-	public int getStartTime_max_min()
+	public String getStartTime_max_min()
 	{
 		return startTime_max_min;
 	}
-	public void setStartTime_max_min(int startTime_max_min)
+	public void setStartTime_max_min(String startTime_max_min)
 	{
 		this.startTime_max_min = startTime_max_min;
 	}

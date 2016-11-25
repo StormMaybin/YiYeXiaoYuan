@@ -45,6 +45,21 @@
     <servlet-name>TrueLoveServlet</servlet-name>
     <servlet-class>com.yiyexiaoyuan.web.controller.TrueLoveServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>PubTimeServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.PubTimeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>NewCarServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.NewCarServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MInformationServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.MInformationServlet</servlet-class>
+  </servlet>
+
+
+
 
 
 
@@ -94,6 +109,18 @@
   <servlet-mapping>
     <servlet-name>TrueLoveServlet</servlet-name>
     <url-pattern>/servlet/TrueLoveServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PubTimeServlet</servlet-name>
+    <url-pattern>/servlet/PubTimeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NewCarServlet</servlet-name>
+    <url-pattern>/servlet/NewCarServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MInformationServlet</servlet-name>
+    <url-pattern>/servlet/MInformationServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

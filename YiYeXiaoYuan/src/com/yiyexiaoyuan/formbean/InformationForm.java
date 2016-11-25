@@ -27,7 +27,13 @@ public class InformationForm
 	private String curtMember;
 	//拼车信息备注
 	private String message;
-
+	//发起人用户名
+	private String userName;
+	//发起人Id
+	private String uid;
+	//发布日期
+	private String pubTime;
+	
 	public String getStartPos()
 	{
 		return this.startPos;
@@ -137,7 +143,48 @@ public class InformationForm
 	{
 		this.errors = errors;
 	}
+	
+	public String getUserName()
+	{
+		return userName;
+	}
 
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+
+	public String getUid()
+	{
+		return uid;
+	}
+
+	public void setUid(String uid)
+	{
+		this.uid = uid;
+	}
+	
+	public String getPubTime()
+	{
+		return pubTime;
+	}
+
+	public void setPubTime(String pubTime)
+	{
+		this.pubTime = pubTime;
+	}
+
+	@Override
+	public String toString()
+	{
+		// TODO Auto-generated method stub
+		return startPos+"\r\n"+arrivePos+"\r\n"+startDate+"\r\n"
+				+startTime_min_hour+":"+startTime_min_min+"-"+startTime_max_hour+":"+startTime_max_min+"\r\n"
+				+maxMember+"\r\n"+curtMember+"\r\n"+message+"\r\n"
+				+userName+"\r\n"+uid+"\r\n"+"发布日期:"+pubTime;
+	}
+
+	
 	public boolean checked()
 	{
 		boolean isOk = true;

@@ -1,7 +1,6 @@
 package com.yiyexiaoyuan.service.impl;
 
 import com.chuanglan.port.HttpSender;
-import java.io.PrintStream;
 import java.util.Random;
 /**
  * 发送短信验证码服务
@@ -37,6 +36,7 @@ public class SendMessageService
 		{
 			e.printStackTrace();
 		}
+		System.out.println(code);
 		return code;
 	}
 

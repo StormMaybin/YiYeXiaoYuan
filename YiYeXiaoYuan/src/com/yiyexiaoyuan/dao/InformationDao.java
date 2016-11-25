@@ -15,7 +15,7 @@ public interface InformationDao
 	 * @return void
 	 * @param i
 	 */
-	public abstract void add(Information i);
+	public abstract boolean add(Information i);
 	
 	/**
 	 * method 2
@@ -25,7 +25,7 @@ public interface InformationDao
 	 * @param uid
 	 * @return Information
 	 */
-	public abstract Information findByUid(int uid);
+	public abstract Information findById(int id);
 
 	/**
 	 * method 3

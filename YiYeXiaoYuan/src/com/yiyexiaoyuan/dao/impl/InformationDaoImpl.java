@@ -23,7 +23,7 @@ public class InformationDaoImpl implements InformationDao
 	 * @return void
 	 * @param i
 	 */
-	public void add (Information i)
+	public boolean add (Information i)
 	{
 		Connection conn = null;
 		PreparedStatement stat = null;
@@ -45,10 +45,10 @@ public class InformationDaoImpl implements InformationDao
 			stat.setDate(2, new java.sql.Date(i.getStartDate().getTime()));
 			stat.setString(3, i.getStartPos());
 			stat.setString(4, i.getArrivePos());
-			stat.setInt(5, i.getStartTime_min_hour());
-			stat.setInt(6, i.getStartTime_min_min()) ;
-			stat.setInt(7, i.getStartTime_max_hour());
-			stat.setInt(8, i.getStartTime_max_min());
+			stat.setString(5, i.getStartTime_min_hour());
+			stat.setString(6, i.getStartTime_min_min()) ;
+			stat.setString(7, i.getStartTime_max_hour());
+			stat.setString(8, i.getStartTime_max_min());
 			stat.setInt(9, i.getMaxMember());
 			stat.setInt(10, i.getCurtMember());
 			stat.setString(11, i.getMessage());
@@ -56,7 +56,7 @@ public class InformationDaoImpl implements InformationDao
 			/*
 			 * 执行操作
 			 */
-			stat.executeUpdate();
+			return stat.executeUpdate() == 1;
 		} 
 		catch (Exception e) 
 		{
@@ -74,13 +74,13 @@ public class InformationDaoImpl implements InformationDao
 
 	/**
 	 * method 2
-	 * 根据用户id查找行程信息
+	 * 根据拼车信息id查找行程信息
 	 * 
 	 * @author StormMaybin
 	 * @param uid
 	 * @return Information
 	 */
-	public Information findByUid(int uid)
+	public Information findById(int id)
 	{
 		Connection conn = null;
 		PreparedStatement stat = null;
@@ -89,9 +89,9 @@ public class InformationDaoImpl implements InformationDao
 		try 
 		{
 			conn = DBUtil.getConnection();
-			stat = conn.prepareStatement("SELECT * FROM information WHERE uid = ?");
+			stat = conn.prepareStatement("SELECT * FROM information WHERE id = ?");
 			//设置参数
-			stat.setInt(1, uid);
+			stat.setInt(1, id);
 
 			//ִ执行操作
 			result = stat.executeQuery();
@@ -102,15 +102,15 @@ public class InformationDaoImpl implements InformationDao
 				i = new Information();
 				
 				//封装数据到Information对象
-				i.setUid(uid);
-				i.setId(result.getInt("id"));
+				i.setUid(result.getInt("uid"));
+				i.setId(id);
 				i.setStartDate(result.getDate("startDate"));
 				i.setStartPos(result.getString("startPos"));
 				i.setArrivePos(result.getString("arrivePos"));
-				i.setStartTime_min_hour(result.getInt("startTime_min_hour"));
-				i.setStartTime_min_min(result.getInt("startTime_min_min"));
-				i.setStartTime_max_hour(result.getInt("startTime_max_hour"));
-				i.setStartTime_max_min(result.getInt("startTime_max_min"));
+				i.setStartTime_min_hour(result.getString("startTime_min_hour"));
+				i.setStartTime_min_min(result.getString("startTime_min_min"));
+				i.setStartTime_max_hour(result.getString("startTime_max_hour"));
+				i.setStartTime_max_min(result.getString("startTime_max_min"));
 				i.setMaxMember(result.getInt("maxMember"));
 				i.setCurtMember(result.getInt("curtMember"));
 				i.setMessage(result.getString("message"));
@@ -163,10 +163,10 @@ public class InformationDaoImpl implements InformationDao
 				i.setStartDate(result.getDate("startDate"));
 				i.setStartPos(result.getString("startPos"));
 				i.setArrivePos(result.getString("arrivePos"));
-				i.setStartTime_min_hour(result.getInt("startTime_min_hour"));
-				i.setStartTime_min_min(result.getInt("startTime_min_min"));
-				i.setStartTime_max_hour(result.getInt("startTime_max_hour"));
-				i.setStartTime_max_min(result.getInt("startTime_max_min"));
+				i.setStartTime_min_hour(result.getString("startTime_min_hour"));
+				i.setStartTime_min_min(result.getString("startTime_min_min"));
+				i.setStartTime_max_hour(result.getString("startTime_max_hour"));
+				i.setStartTime_max_min(result.getString("startTime_max_min"));
 				i.setMaxMember(result.getInt("maxMember"));
 				i.setCurtMember(result.getInt("curtMember"));
 				i.setMessage(result.getString("message"));
@@ -223,10 +223,10 @@ public class InformationDaoImpl implements InformationDao
 				i.setStartDate(result.getDate("startDate"));
 				i.setStartPos(result.getString("startPos"));
 				i.setArrivePos(result.getString("arrivePos"));
-				i.setStartTime_min_hour(result.getInt("startTime_min_hour"));
-				i.setStartTime_min_min(result.getInt("startTime_min_min"));
-				i.setStartTime_max_hour(result.getInt("startTime_max_hour"));
-				i.setStartTime_max_min(result.getInt("startTime_max_min"));
+				i.setStartTime_min_hour(result.getString("startTime_min_hour"));
+				i.setStartTime_min_min(result.getString("startTime_min_min"));
+				i.setStartTime_max_hour(result.getString("startTime_max_hour"));
+				i.setStartTime_max_min(result.getString("startTime_max_min"));
 				i.setMaxMember(result.getInt("maxMember"));
 				i.setCurtMember(result.getInt("curtMember"));
 				i.setMessage(result.getString("message"));
@@ -277,10 +277,10 @@ public class InformationDaoImpl implements InformationDao
 				i.setStartDate(result.getDate("startDate"));
 				i.setStartPos(result.getString("startPos"));
 				i.setArrivePos(result.getString("arrivePos"));
-				i.setStartTime_min_hour(result.getInt("startTime_min_hour"));
-				i.setStartTime_min_min(result.getInt("startTime_min_min"));
-				i.setStartTime_max_hour(result.getInt("startTime_max_hour"));
-				i.setStartTime_max_min(result.getInt("startTime_max_min"));
+				i.setStartTime_min_hour(result.getString("startTime_min_hour"));
+				i.setStartTime_min_min(result.getString("startTime_min_min"));
+				i.setStartTime_max_hour(result.getString("startTime_max_hour"));
+				i.setStartTime_max_min(result.getString("startTime_max_min"));
 				i.setMaxMember(result.getInt("maxMember"));
 				i.setCurtMember(result.getInt("curtMember"));
 				i.setMessage(result.getString("message"));
@@ -331,10 +331,10 @@ public class InformationDaoImpl implements InformationDao
 			stat.setDate(2, new java.sql.Date(i.getStartDate().getTime()));
 			stat.setString(3, i.getStartPos());
 			stat.setString(4, i.getArrivePos());
-			stat.setInt(5, i.getStartTime_min_hour());
-			stat.setInt(6, i.getStartTime_min_min());
-			stat.setInt(7, i.getStartTime_max_hour());
-			stat.setInt(8, i.getStartTime_max_min());
+			stat.setString(5, i.getStartTime_min_hour());
+			stat.setString(6, i.getStartTime_min_min());
+			stat.setString(7, i.getStartTime_max_hour());
+			stat.setString(8, i.getStartTime_max_min());
 			stat.setInt(9, i.getMaxMember());
 			stat.setInt(10, i.getCurtMember());
 			stat.setString(11, i.getMessage());
@@ -392,10 +392,10 @@ public class InformationDaoImpl implements InformationDao
 				i.setStartDate(result.getDate("startDate"));
 				i.setStartPos(result.getString("startPos"));
 				i.setArrivePos(result.getString("arrivePos"));
-				i.setStartTime_min_hour(result.getInt("startTime_min_hour"));
-				i.setStartTime_min_min(result.getInt("startTime_min_min"));
-				i.setStartTime_max_hour(result.getInt("startTime_max_hour"));
-				i.setStartTime_max_min(result.getInt("startTime_max_min"));
+				i.setStartTime_min_hour(result.getString("startTime_min_hour"));
+				i.setStartTime_min_min(result.getString("startTime_min_min"));
+				i.setStartTime_max_hour(result.getString("startTime_max_hour"));
+				i.setStartTime_max_min(result.getString("startTime_max_min"));
 				i.setMaxMember(result.getInt("maxMember"));
 				i.setCurtMember(result.getInt("curtMember"));
 				i.setMessage(result.getString("message"));

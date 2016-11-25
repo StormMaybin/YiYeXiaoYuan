@@ -14,7 +14,7 @@ public class UserInfo
 	//用户购买票数
 	private int amount;
 	//出发日期
-	private java.util.Date startDate;
+	private Date startDate;
 	//出发时间
 	private String startTime;
 	//到达目的地

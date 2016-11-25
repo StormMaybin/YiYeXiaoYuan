@@ -46,6 +46,6 @@ public class LoginForm
 		{
 			return isOk = false;
 		}
-		return true;
+		return isOk;
 	}
 }

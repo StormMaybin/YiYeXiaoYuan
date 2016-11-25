@@ -6,7 +6,6 @@ import com.yiyexiaoyuan.domain.User;
 import com.yiyexiaoyuan.exception.CannotAlterUserNameException;
 import com.yiyexiaoyuan.exception.UserExitException;
 import com.yiyexiaoyuan.service.impl.UserService;
-import java.io.PrintStream;
 import org.junit.Test;
 
 public class UserServiceTest

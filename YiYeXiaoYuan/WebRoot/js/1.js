@@ -1,65 +1,56 @@
 //by yzy
+console.log('x');
+// 日历处理
+function GetDateStr() {
+    var dd = new Date();
+    var y = dd.getFullYear();
+    var m = dd.getMonth() + 1;
+    if (m < 10) {
+        m = '0' + m;
+    }
+    var d = dd.getDate();
+    if (d < 10) {
+        d = '0' + d;
+    }
+    return y + "-" + m + "-" + d;
+}
+var dateToday = GetDateStr();
+$("#rili-date").attr("value", dateToday);// 今日日期
 
-var $self;// 用作刷新拼车信息的变量
-var addperson = function(num) {
-	for ( var i = 0; i < num; i++) {
-		$self.find('.information-people>span:eq(' + i + ')').addClass(
-				'glyphicon glyphicon-user');
-	}
-};// 添加拼车总人数
-var addcolor = function(num) {
-	for ( var i = 0; i < num; i++) {
-		$self.find('.information-people>span:eq(' + i + ')').addClass(
-				'add-color');
-	}
-};
-// 添加已有拼车人数
-var fresh_page = function() {
-	$
-			.ajax({
-				method : 'get',
-				url : 'servlet/IndexServlet',
-				dataType : 'json',
-				success : function(data) {
-					var carData = data;
-					for ( var i = 0; i < 2; ++i) {
-						$('#dataUl')
-								.append(
-										'<li><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
-												+ carData[i].startDate
-												+ '</span><span class="time-time startTime">'
-												+ carData[i].startTime_min_hour
-												+ ':'
-												+ carData[i].startTime_min_min
-												+ '-'
-												+ carData[i].startTime_max_hour
-												+ ':'
-												+ carData[i].startTime_max_min
-												+ '</span></div><div class="information-where"><span>出发:<span class="where-start startPos">'
-												+ carData[i].startPos
-												+ '</span></span><span class="where-end">到达:</span><span class="where-finish arrivePos">'
-												+ carData[i].arrivePos
-												+ '</span></div><div class="information-people"><span class="glyphicon glyphicon-user people-applied"></span><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span><span class="people-number">上限<p class="maxMember" style="display: inline;">'
-												+ carData[i].maxMember
-												+ '</p>人，已有<p class="curtMember"  style="display: inline;">'
-												+ carData[i].curtMember
-												+ '</p>人</span></div><div class="information-remark"><span>备注:</span><span class="remark-content message">'
-												+ carData[i].message
-												+ '</span></div><div class="information-issue">发布于<span class="issue-date pubtime">'
-												+ carData[i].pubTime
-												+ '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名</button></div></div></li>');
-					}
-					return true;
-				},
-				error : function() {
-					alert('net wrong');
-				}
-			});// 拿到所选时间下的数据
+var nowTemp = new Date();
+var nowDay = new Date(nowTemp.getFullYear(), nowTemp.getMonth(),
+    nowTemp.getDate(), 0, 0, 0, 0).valueOf();
+var nowAfterDay = nowDay + 31 * 2 * 24 * 60 * 60 * 1000;
+// alert(nowTemp);
+var nowMoth = new Date(nowTemp.getFullYear(), nowTemp.getMonth(),
+    1, 0, 0, 0, 0).valueOf();
+var nowYear = new Date(nowTemp.getFullYear(), 0, 1, 0, 0, 0, 0)
+    .valueOf();
+var $myStart2 = $('#rili-date');
 
-};
-fresh_page();
-$(window).ready(
-		function() {
+var checkin = $myStart2.datepicker({
+    theme : "danger",
+    onRender : function(date, viewMode) {
+        // 默认 days 视图，与当前日期比较
+        var viewDate = nowDay;
+
+        switch (viewMode) {
+            // moths 视图，与当前月份比较
+            case 1:
+                viewDate = nowMoth;
+                break;
+            // years 视图，与当前年份比较
+            case 2:
+                viewDate = nowYear;
+                break;
+        }
+        return date.valueOf() > nowAfterDay ? 'am-disabled' : ''
+        || date.valueOf() < viewDate ? 'am-disabled' : '';
+
+    }
+
+});//date
+
 			var usr_id = window.sessionStorage.getItem('userName');// 取id
 			// 用户头像click
 			$('#user1').on('tap click', function() {
@@ -69,70 +60,68 @@ $(window).ready(
 					window.location.href = 'login.html';
 				}
 			});
-			// 日历处理
-			function GetDateStr() {
-				var dd = new Date();
-				var y = dd.getFullYear();
-				var m = dd.getMonth() + 1;
-				if (m < 10) {
-					m = '0' + m;
-				}
-				var d = dd.getDate();
-				if (d < 10) {
-					d = '0' + d;
-				}
-				return y + "-" + m + "-" + d;
-			}
-			var dateToday = GetDateStr();
-			$("#rili-date").attr("placeholder", dateToday);// 今日日期
 
-			var nowTemp = new Date();
-			var nowDay = new Date(nowTemp.getFullYear(), nowTemp.getMonth(),
-					nowTemp.getDate(), 0, 0, 0, 0).valueOf();
-			var nowAfterDay = nowDay + 31 * 2 * 24 * 60 * 60 * 1000;
-			// alert(nowTemp);
-			var nowMoth = new Date(nowTemp.getFullYear(), nowTemp.getMonth(),
-					1, 0, 0, 0, 0).valueOf();
-			var nowYear = new Date(nowTemp.getFullYear(), 0, 1, 0, 0, 0, 0)
-					.valueOf();
-			var $myStart2 = $('#rili-date');
-
-			var checkin = $myStart2.datepicker({
-				theme : "danger",
-				onRender : function(date, viewMode) {
-					// 默认 days 视图，与当前日期比较
-					var viewDate = nowDay;
-
-					switch (viewMode) {
-					// moths 视图，与当前月份比较
-					case 1:
-						viewDate = nowMoth;
-						break;
-					// years 视图，与当前年份比较
-					case 2:
-						viewDate = nowYear;
-						break;
-					}
-					return date.valueOf() > nowAfterDay ? 'am-disabled' : ''
-							|| date.valueOf() < viewDate ? 'am-disabled' : '';
-
-				}
-
-			}) // 真爱弹窗
-			sessionStorage.setItem("timer", true);
-			$("#rili-date").change(
-					function() {
-						var $date = $('#rili-date').val();
-						var $arr = [ '2017-01-13', '2017-01-14', '2017-01-15',
-								'2017-01-16' ];
-						var timer = sessionStorage.getItem('timer');
-						for ( var i = 0; i < $arr.length; ++i) {
-							if (($arr[i] == $date) && (timer == "true")) {
-								$('#dialog-love').fadeIn(300);
-								sessionStorage.setItem("timer", false)
-							}
-						}
-					});
+			// sessionStorage.setItem("timer", true);
+			// $("#rili-date").change(function() {
+			// 			var $date = $('#rili-date').val();
+			// 			$.ajax({
+			// 				method:'post',
+			// 				url:'servlet/PubTimeServlet',
+			// 				dataType:'json',
+			// 				data:{
+			// 					'pubTime': $date
+			// 				},
+			// 				success:function(data){
+			// 					var carData = data;
+			// 					$('.list-unstyled').children('.child').remove();//remove function!!!!
+			// 					for ( var i = 0; i < data.length; ++i) {
+			// 						$('#dataUl')
+			// 								.append(
+			// 										'<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
+			// 												+ carData[i].startDate
+			// 												+ '</span><span class="time-time startTime">'
+			// 												+ carData[i].startTime_min_hour
+			// 												+ ':'
+			// 												+ carData[i].startTime_min_min
+			// 												+ '-'
+			// 												+ carData[i].startTime_max_hour
+			// 												+ ':'
+			// 												+ carData[i].startTime_max_min
+			// 												+ '</span></div><div class="information-where"><span>出发:<span class="where-start startPos">'
+			// 												+ carData[i].startPos
+			// 												+ '</span></span><span class="where-end">到达:</span><span class="where-finish arrivePos">'
+			// 												+ carData[i].arrivePos
+			// 												+ '</span></div><div class="information-people"><span class="glyphicon glyphicon-user people-applied"></span><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span><span class="people-number">上限<p class="maxMember" style="display: inline;">'
+			// 												+ carData[i].maxMember
+			// 												+ '</p>人，已有<p class="curtMember"  style="display: inline;">'
+			// 												+ carData[i].curtMember
+			// 												+ '</p>人</span></div><div class="information-remark"><span>备注:</span><span class="remark-content message">'
+			// 												+ carData[i].message
+			// 												+ '</span></div><div class="information-issue">发布于<span class="issue-date pubtime">'
+			// 												+ carData[i].pubTime
+			// 												+ '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名</button></div></div></li>');
+			// 					}
+			// 				},
+			// 				error:function(){
+			// 					alert("net wrong");
+			// 				}
+			//
+			// 			});
+			//
+			//
+			//
+			//
+			//
+			// 			var $arr = [ '2017-01-13', '2017-01-14', '2017-01-15',
+			// 					'2017-01-16' ];
+			// 			var timer = sessionStorage.getItem('timer');
+			// 			for ( var i = 0; i < $arr.length; ++i) {
+			// 				if (($arr[i] == $date) && (timer == "true")) {
+			// 					$('#dialog-love').fadeIn(300);
+			// 					sessionStorage.setItem("timer", false)
+			// 				}
+			// 			}
+			// 		});
 
 			// 报名按钮事件 yzy
 			$('.issue-btn').on('click tap', function() {
@@ -162,6 +151,8 @@ $(window).ready(
 							data : {
 							// usr_id
 							// info_id
+                                'uid': window.sessionStorage.getItem('userId'),
+                                'id':  that.find('#carId').html()
 							},
 							dataType : 'json',
 							success : function(data) {
@@ -206,6 +197,7 @@ $(window).ready(
 					} else {
 						//引导至注册面
 						//点击报名未登录
+                        // console.log(that.find('#carId').html());
 						$('#dialog-login').fadeIn(300);
 						setTimeout(function() {
 							location.href = 'login.html';
@@ -223,7 +215,7 @@ $(window).ready(
 			//真爱跳转
 			$('#trueLove').on('click tap', function() {
 				window.location.href = 'trueLove-bus.html'
-			})
+			});
 
 			$("#dialog-love span:eq(0)").on("tap click", function() {
 				$("#dialog-love").css("display", "none");
@@ -239,4 +231,3 @@ $(window).ready(
 				$('.scroller').css('transform', 'matrix(1, 0, 0, 1, 0, -40)');
 			});
 
-		});

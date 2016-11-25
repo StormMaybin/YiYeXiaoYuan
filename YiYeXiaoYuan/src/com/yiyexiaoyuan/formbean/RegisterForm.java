@@ -31,6 +31,6 @@ public class RegisterForm
 		{
 			return isOk = false;
 		}
-		return true;
+		return isOk;
 	}
 }

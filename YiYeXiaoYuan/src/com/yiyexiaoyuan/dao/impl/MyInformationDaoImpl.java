@@ -52,10 +52,10 @@ public class MyInformationDaoImpl implements MyInformationDao
 				i.setStartDate(result.getDate("startDate"));
 				i.setStartPos(result.getString("startPos"));
 				i.setArrivePos(result.getString("arrivePos"));
-				i.setStartTime_min_hour(result.getInt("startTime_min_hour"));
-				i.setStartTime_min_min(result.getInt("startTime_min_min"));
-				i.setStartTime_max_hour(result.getInt("startTime_max_hour"));
-				i.setStartTime_max_min(result.getInt("startTime_max_min"));
+				i.setStartTime_min_hour(result.getString("startTime_min_hour"));
+				i.setStartTime_min_min(result.getString("startTime_min_min"));
+				i.setStartTime_max_hour(result.getString("startTime_max_hour"));
+				i.setStartTime_max_min(result.getString("startTime_max_min"));
 				i.setMaxMember(result.getInt("maxMember"));
 				i.setCurtMember(result.getInt("curtMember"));
 				i.setMessage(result.getString("message"));

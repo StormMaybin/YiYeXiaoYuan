@@ -74,4 +74,19 @@ public class TrueLoveForm
 	{
 		this.mobile = mobile;
 	}
+	@Override
+	public String toString()
+	{
+		// TODO Auto-generated method stub
+		return "id: "+id +"\r\n"
+				+"name: "+name+"\r\n"
+				+"address: "+address+"\r\n"
+				+"amount: "+amount+"\r\n"
+				+"startDate: "+startDate+"\r\n"
+				+"startTime: "+startTime+"\r\n"
+				+"arrive: "+arrive+"\r\n"
+				+"mobile: "+mobile+"\r\n";
+	}
+	
+	
 }

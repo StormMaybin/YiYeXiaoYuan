@@ -27,10 +27,10 @@ public class InformationDaoTest
 		i.setStartDate(sdf.parse("2016-11-08"));
 		i.setStartPos("西电南校区");
 		i.setArrivePos("火车站");
-		i.setStartTime_min_hour(0);
-		i.setStartTime_max_min(0);
-		i.setStartTime_max_hour(23);
-		i.setStartTime_min_min(59);
+		i.setStartTime_min_hour(00+"");
+		i.setStartTime_max_min(00+"");
+		i.setStartTime_max_hour(23+"");
+		i.setStartTime_min_min(59+"");
 		i.setMaxMember(6);
 		i.setCurtMember(3);
 		i.setMessage("我人很准时");
@@ -52,10 +52,10 @@ public class InformationDaoTest
 		i.setStartDate(sdf.parse("2016-11-13"));
 		i.setStartPos("西电北校区");
 		i.setArrivePos("西电北校区");
-		i.setStartTime_min_hour(18);
-		i.setStartTime_min_min(00);
-		i.setStartTime_max_hour(19);
-		i.setStartTime_max_min(00);
+		i.setStartTime_min_hour(18+"");
+		i.setStartTime_min_min(00+"");
+		i.setStartTime_max_hour(19+"");
+		i.setStartTime_max_min(00+"");
 		i.setMaxMember(6);
 		i.setCurtMember(4);
 		i.setMessage("行李有点多");
@@ -69,7 +69,7 @@ public class InformationDaoTest
 		InformationDao idao = new InformationDaoImpl();
 		Information i = null;
 		
-		i = idao.findByUid(3);
+		i = idao.findById(3);
 		if (i != null)
 		{
 			System.out.println(i.toString());
@@ -140,10 +140,10 @@ public class InformationDaoTest
 		i.setStartDate(sdf.parse("2016-11-08"));
 		i.setStartPos("西电南校区");
 		i.setArrivePos("火车站");
-		i.setStartTime_min_hour(00);
-		i.setStartTime_min_min(00);
-		i.setStartTime_max_hour(23);
-		i.setStartTime_max_min(59);
+		i.setStartTime_min_hour(00+"");
+		i.setStartTime_min_min(00+"");
+		i.setStartTime_max_hour(23+"");
+		i.setStartTime_max_min(59+"");
 		i.setMaxMember(6);
 		i.setCurtMember(3);
 		i.setMessage("我人很准时");

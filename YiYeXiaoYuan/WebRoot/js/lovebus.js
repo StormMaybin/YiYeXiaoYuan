@@ -2,20 +2,20 @@ $(function(){
 		$('#love-sub').on('tap click',function(ev){
 		ev.preventDefault();
 //		var usr_id=window.sessionStorage.getItem('usr_id');
-		var n 
+		var num1=$('#numb1').val();
 		var radio1=	$('input:radio[name="where"]:checked').val();
 		var radio2=	$('input:radio[name="date"]:checked').val();
 		var radio3=	$('input:radio[name="time"]:checked').val();
 		var mes1=$('#love-sushe').val();
 		var mes2=$('#love-name').val();
 		var reg=/^.{0,8}$/;
-		var usr_id=window.sessionStorage.getItem('userId');
-		alert(radio2,radio3,mes1,mes2,usr_id);
+		var userTel=window.sessionStorage.getItem('userTel');
+		/*alert(radio2,radio3,mes1,mes2,usr_id);
 		alert(radio3,mes1,mes2,usr_id)
 		alert(mes1,mes2,usr_id)
 		alert(mes2,usr_id)
-		alert(usr_id)
-			if(usr_id==null){											//判断登陆
+		alert(usr_id)*/
+			if(userTel==null){											//判断登陆
 				$('#dialog-login').fadeIn(300);
 		        setTimeout(function () {	
 		            window.location.href='login.html'
@@ -34,7 +34,7 @@ $(function(){
 				$(".dialog-btn a:eq(0)").on('click tap',function () {
 					$.ajax({
 						method:'post',
-						url:'',
+						url:'servlet/TrueLoveServlet',
 						data:{
 							'arrive':radio1,
 							'startDate':radio2,
@@ -42,7 +42,7 @@ $(function(){
 							'name':mes2,
 							'address':mes1,
 							'amount':num1,
-							'moible':usr_id
+							'mobile':userTel	
 						},
 						dataType:'json',									
 					        success: function (data) {
@@ -99,8 +99,8 @@ $(function(){
   	
   		$('.love-date input[type="radio"]').on('click tap',function(){
   			var val=$('input:radio[name="date"]:checked').val();
-  			var val1='2017-1-13';
-  			var val2='2017-1-16';
+  			var val1='2017-01-13';
+  			var val2='2017-01-16';
   			if(val==val1){
   				$('.love-time label').removeAttr('class');
   				$('.love-time label').css('display','none');
@@ -117,7 +117,7 @@ $(function(){
   				$('.love-time input[type="radio"]').removeAttr('checked');
   				$('.yingcang').css('display','none');
  				$('#xiugai').text('7:00');
-  				$('#time1').val('7:00');
+  				$('#time1').val('07:00');
   				 
   			}
   			else if(val!==val1||val!==val2){
@@ -125,7 +125,7 @@ $(function(){
   				$('.yingcang').css('display','inline');
   				$('#label1').css('display','inline')
  				$('#xiugai').text('6:00');
-  				$('#time1').val('6:00');
+  				$('#time1').val('06:00');
   				
   			}
   		});
