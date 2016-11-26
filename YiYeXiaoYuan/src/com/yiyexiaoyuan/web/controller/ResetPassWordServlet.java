@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import com.yiyexiaoyuan.domain.User;
-import com.yiyexiaoyuan.service.impl.UserService;
+import com.yiyexiaoyuan.service.UserService;
+import com.yiyexiaoyuan.service.impl.UserServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
 
 public class ResetPassWordServlet extends HttpServlet
@@ -40,7 +41,7 @@ public class ResetPassWordServlet extends HttpServlet
 		
 		if (u != null)
 		{
-			service = new UserService();
+			service = new UserServiceImpl();
 			//开始重置密码
 			boolean result = service.resetPassWordService(u, u.getPassWord());
 			if (result)

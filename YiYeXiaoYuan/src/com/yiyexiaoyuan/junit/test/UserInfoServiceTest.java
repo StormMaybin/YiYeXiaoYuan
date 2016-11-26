@@ -1,7 +1,8 @@
 package com.yiyexiaoyuan.junit.test;
 
 import com.yiyexiaoyuan.domain.UserInfo;
-import com.yiyexiaoyuan.service.impl.UserInfoService;
+import com.yiyexiaoyuan.service.UserInfoService;
+import com.yiyexiaoyuan.service.impl.UserInfoServiceImpl;
 import java.util.ArrayList;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class UserInfoServiceTest
 		ui.setName("张三");
 		ui.setAddress("海棠十号楼1区202左室");
 
-		UserInfoService service = new UserInfoService();
+		UserInfoService service = new UserInfoServiceImpl();
 		boolean result = service.addService(ui);
 		if (result)
 		{
@@ -33,7 +34,7 @@ public class UserInfoServiceTest
 	{
 		ArrayList<UserInfo> list = null;
 
-		UserInfoService service = new UserInfoService();
+		UserInfoService service = new UserInfoServiceImpl();
 		list = service.queryUserInfoService();
 
 		for (UserInfo ui : list)

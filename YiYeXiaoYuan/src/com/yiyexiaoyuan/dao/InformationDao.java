@@ -54,7 +54,7 @@ public interface InformationDao
 	 * @param pubTime
 	 * @return ArrayList<Information>
 	 */
-	public abstract ArrayList<Information> queryByPubTime(Date paramDate);
+	public abstract ArrayList<Information> queryByPubTime(Date pubTime);
 
 	/**
 	 * method 6
@@ -75,4 +75,14 @@ public interface InformationDao
 	 * @return Information
 	 */
 	public abstract Information queryInformationById(int id);
+	
+	/**
+	 * method 8
+	 * 根据发布时间查找拼车信息
+	 * 
+	 * @author StormMaybin
+	 * @param pubTime
+	 * @return ArrayList<Information>
+	 */
+	public abstract ArrayList<Information> queryByStartDate (Date startDate);
 }

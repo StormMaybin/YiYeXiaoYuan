@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import com.yiyexiaoyuan.domain.User;
-import com.yiyexiaoyuan.service.impl.UserService;
+import com.yiyexiaoyuan.service.UserService;
+import com.yiyexiaoyuan.service.impl.UserServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
 
 public class SetQQServlet extends HttpServlet
@@ -32,7 +33,7 @@ public class SetQQServlet extends HttpServlet
 			throws ServletException, IOException
 	{
 		//创建服务对象
-		UserService service = new UserService();
+		UserService service = new UserServiceImpl();
 		
 		User user = null;
 		user = WebUtils.request2Bean(request, User.class);

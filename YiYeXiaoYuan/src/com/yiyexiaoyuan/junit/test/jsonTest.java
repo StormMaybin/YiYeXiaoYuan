@@ -11,7 +11,8 @@ import net.sf.json.processors.JsonValueProcessor;
 import org.junit.Test;
 
 import com.yiyexiaoyuan.domain.Information;
-import com.yiyexiaoyuan.service.impl.InformationService;
+import com.yiyexiaoyuan.service.InformationService;
+import com.yiyexiaoyuan.service.impl.InformationServiceImpl;
 
 public class jsonTest
 {
@@ -36,7 +37,7 @@ public class jsonTest
 //		JSONArray json = new JSONArray().fromObject(list,jsonConfig);
 //		System.out.println(json);
 		
-		InformationService service = new InformationService();
+		InformationService service = new InformationServiceImpl();
 		ArrayList<Information> list = service.queryInformationService();
 		
 		list = service.queryInformationService();

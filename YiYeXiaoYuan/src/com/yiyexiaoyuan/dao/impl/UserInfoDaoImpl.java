@@ -112,4 +112,52 @@ public class UserInfoDaoImpl implements UserInfoDao
 			DBUtil.closeConnection(conn, stat, result);
 		}
 	}
+	/**
+	 * 根据用户id查找购票信息
+	 * @author StormMaybin
+	 * @param iId
+	 * @return
+	 */
+	public ArrayList<UserInfo> queryUserInfo (int uId)
+	{
+		ArrayList<UserInfo> list = null;
+		Connection conn = null;
+		PreparedStatement stat = null;
+		ResultSet result = null;
+		
+		conn = DBUtil.getConnection();
+		try
+		{
+			stat = conn.prepareStatement("SELECT * FROM user_info WHERE id = ?");
+			stat.setInt(1, uId);
+			
+			result = stat.executeQuery();
+			list = new ArrayList<UserInfo>();
+			while (result.next())
+			{
+				UserInfo u = new UserInfo();
+				u.setAddress(result.getString("address"));
+				System.out.println("上面是对的");
+				u.setAmount(result.getInt("amount"));
+				u.setArrive(result.getString("arrive"));
+				u.setId(uId);
+				u.setName(result.getString("name"));
+				u.setStartDate(result.getDate("startDate"));
+				u.setStartTime(result.getTime("startTime")+"");
+				
+				list.add(u);
+			}	
+			return list;
+		} 
+		catch (SQLException e)
+		{
+			// 异常转型
+			throw new RuntimeException(e);
+		}
+		finally
+		{
+			//关闭资源
+			DBUtil.closeConnection(conn, stat, result);
+		}
+	}
 }

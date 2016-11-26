@@ -14,7 +14,8 @@ import net.sf.json.JSONObject;
 import com.yiyexiaoyuan.domain.User;
 import com.yiyexiaoyuan.exception.CannotAlterUserNameException;
 import com.yiyexiaoyuan.exception.UserExitException;
-import com.yiyexiaoyuan.service.impl.UserService;
+import com.yiyexiaoyuan.service.UserService;
+import com.yiyexiaoyuan.service.impl.UserServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
 
 public class updateUserNameServlet extends HttpServlet
@@ -40,7 +41,7 @@ public class updateUserNameServlet extends HttpServlet
 		if (u != null)
 		{
 			System.out.println(u.getMobile()+"  "+u.getUserName());
-			UserService service = new UserService();
+			UserService service = new UserServiceImpl();
 			
 			try
 			{

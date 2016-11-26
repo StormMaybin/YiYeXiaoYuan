@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 
 import com.yiyexiaoyuan.domain.Information;
-import com.yiyexiaoyuan.service.impl.InformationService;
+import com.yiyexiaoyuan.service.InformationService;
+import com.yiyexiaoyuan.service.impl.InformationServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
 
 public class PubTimeServlet extends HttpServlet
@@ -43,7 +44,7 @@ public class PubTimeServlet extends HttpServlet
 
 		System.out.println("pubTime:"+pubTime);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		InformationService service = new InformationService();
+		InformationService service = new InformationServiceImpl();
 
 		ArrayList<Information> list = null;
 		try

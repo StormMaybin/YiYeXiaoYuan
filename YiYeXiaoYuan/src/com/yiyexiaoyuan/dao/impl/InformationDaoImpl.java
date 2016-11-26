@@ -409,4 +409,63 @@ public class InformationDaoImpl implements InformationDao
 			throw new RuntimeException(e);
 		}
 	}
+	/**
+	 * method 8
+	 * 根据发布时间查找拼车信息
+	 * 
+	 * @author StormMaybin
+	 * @param pubTime
+	 * @return ArrayList<Information>
+	 */
+	public ArrayList<Information> queryByStartDate (Date startDate)
+	{
+		Connection conn = null;
+		PreparedStatement stat = null;
+		ResultSet result = null;
+		ArrayList<Information> list = null;
+		
+		try
+		{
+			//获得连接
+			conn = DBUtil.getConnection();
+			stat = conn.prepareStatement("SELECT * FROM information WHERE startDate = ?");
+			stat.setDate(1, new java.sql.Date(startDate.getTime()));
+			result = stat.executeQuery();
+			list = new ArrayList<Information>();
+			while (result.next())
+			{
+				//创建对象
+				Information i = new Information();
+				//封装数据
+				i.setId(result.getInt("id"));
+				i.setUid(result.getInt("uid"));
+				i.setStartDate(result.getDate("startDate"));
+				i.setStartPos(result.getString("startPos"));
+				i.setArrivePos(result.getString("arrivePos"));
+				i.setStartTime_min_hour(result.getString("startTime_min_hour"));
+				i.setStartTime_min_min(result.getString("startTime_min_min"));
+				i.setStartTime_max_hour(result.getString("startTime_max_hour"));
+				i.setStartTime_max_min(result.getString("startTime_max_min"));
+				i.setMaxMember(result.getInt("maxMember"));
+				i.setCurtMember(result.getInt("curtMember"));
+				i.setMessage(result.getString("message"));
+				i.setPubTime(result.getDate("pubTime"));
+
+				//添加到集合中去
+				list.add(i);
+			}
+			//返回集合
+			return list;
+		} 
+		catch (SQLException e)
+		{
+			// 异常转型
+			throw new RuntimeException(e);
+		}
+		finally
+		{
+			//关闭资源
+			DBUtil.closeConnection(conn, stat, result);
+		}
+	}
 }

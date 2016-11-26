@@ -75,7 +75,12 @@
             <span>没有更多拼车数据了</span>
         </div>
     </div>
-    <!--没有更多数据-->
+    <div class="one-dialog" id="dialog-error3">
+        <div class="dialog-inner">
+            <span>已报过该行程，请勿重复报名</span>
+        </div>
+    </div>
+    <!--yi'bao'ming-->
     <div id="dialog-love">
         <span>取消</span> <span>进入</span>
     </div>
@@ -85,7 +90,9 @@
     console.log('y');
     var $self;
     var carData1;//全局变量
-    var j = 2;// load function
+    var ticker = 0;//计算完整循环复制次数
+    var ticker2 = 0;//阻止重复刷新
+    var ticker3=0;//第一次加载时移除前两个数据
     var addperson = function (num, $this1) {
         for (var i = 0; i < num; i++) {
             $this1.find('.information-people>span:eq(' + i + ')').addClass(
@@ -98,290 +105,66 @@
                 'add-color');
         }
     };//  添加加入人数
-
+    var disBtn = function ($this) {
+        $this.find('.issue-btn').
+        css("background-color", "#000000").
+        attr('disabled', 'disabled').
+        html('人数已满');
+    };
     var fresh_page = function () {
         $.ajax({
                 method: 'post',
-                url: 'servlet/PubTimeServlet',
+                url: 'servlet/StartDateServlet',
                 dataType: 'json',
                 data:{
-                  'pubTime':$('#rili-date').val()
+                  'startDate':$('#rili-date').val()
                 },
                 async: false,
                 success: function (data) {
+                    ticker2=0;
+                    ticker3=0;
                     var carData = data;
-                    for (var i = 0; i < 2; i++) {
-                        $('#dataUl')
-                            .append(
-                                '<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
-                                + carData[i].startDate
-                                + '</span><span class="time-time startTime">'
-                                + carData[i].startTime_min_hour
-                                + ':'
-                                + carData[i].startTime_min_min
-                                + '-'
-                                + carData[i].startTime_max_hour
-                                + ':'
-                                + carData[i].startTime_max_min
-                                + '</span></div><div class="information-where"><span>出发:<span class="where-start startPos">'
-                                + carData[i].startPos
-                                + '</span></span><span class="where-end">到达:</span><span class="where-finish arrivePos">'
-                                + carData[i].arrivePos
-                                + '</span></div><div class="information-people"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="people-number">上限<p class="maxMember" style="display: inline;">'
-                                + carData[i].maxMember
-                                + '</p>人，已有<p class="curtMember"  style="display: inline;">'
-                                + carData[i].curtMember
-                                + '</p>人</span></div><div class="information-remark"><span>备注:</span><span class="remark-content message">'
-                                + carData[i].message
-                                + '</span></div><div class="information-issue">发布于<span class="issue-date pubtime">'
-                                + carData[i].pubTime
-                                + '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名</button></div></div></li>'
-                            );
+                    for (var i = 0; i < 2; i++) {	
+                       $('#dataUl')
+                                .append(
+                                    '<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
+                                    + carData[i].startDate
+                                    + '</span><span class="time-time startTime">'
+                                    + carData[i].startTime_min_hour
+                                    + ':'
+                                    + carData[i].startTime_min_min
+                                    + '-'
+                                    + carData[i].startTime_max_hour
+                                    + ':'
+                                    + carData[i].startTime_max_min
+                                    + '</span></div><div class="information-where"><span>出发:<span class="where-start startPos">'
+                                    + carData[i].startPos
+                                    + '</span></span><span class="where-end">到达:</span><span class="where-finish arrivePos">'
+                                    + carData[i].arrivePos
+                                    + '</span></div><div class="information-people"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="people-number">上限<p class="maxMember" style="display: inline;">'
+                                    + carData[i].maxMember
+                                    + '</p>人，已有<p class="curtMember"  style="display: inline;">'
+                                    + carData[i].curtMember
+                                    + '</p>人</span></div><div class="information-remark"><span>备注:</span><span class="remark-content message">'
+                                    + carData[i].message
+                                    + '</span></div><div class="information-issue">发布于<span class="issue-date pubtime">'
+                                    + carData[i].pubTime
+                                    + '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名<p  id="carId" hidden>' + carData[i].id + '</p></button></div></div></li>'
+                                ); 
 //                            console.log('1');
                         var m = i + 1;
                         $self = $('.list-unstyled li:eq(' + m + ')');
+                        if(data[i].maxMember==data[i].curtMember){
+                            disBtn($self);
+                        }
                         addperson(carData[i].maxMember, $self);
                         addcolor(carData[i].curtMember, $self);
                     }
                     carData1 = carData;
+//                    $.getScript('js/btn.js');//重加载js
+                    
                     return true;
                 },
-//                error: function () {
-////                        alert('net wrong');
-//                    var carData = [{
-//                        "message": "带回待会  ",
-//                        "id": 17,
-//                        "pubTime": "2016-11-25",
-//                        "uid": 11,
-//                        "curtMember": 5,
-//                        "startTime_min_min": "29",
-//                        "startDate": "2016-11-25",
-//                        "startTime_max_min": "20",
-//                        "startPos": "火车站",
-//                        "startTime_min_hour": "14",
-//                        "startTime_max_hour": "19",
-//                        "maxMember": 6,
-//                        "arrivePos": "西电南校区"
-//                    }, {
-//                        "message": "活生生",
-//                        "id": 16,
-//                        "pubTime": "2016-11-23",
-//                        "uid": 11,
-//                        "curtMember": 5,
-//                        "startTime_min_min": "20",
-//                        "startDate": "2016-11-23",
-//                        "startTime_max_min": "50",
-//                        "startPos": "西电",
-//                        "startTime_min_hour": "14",
-//                        "startTime_max_hour": "17",
-//                        "maxMember": 6,
-//                        "arrivePos": "火车站"
-//                    }, {
-//                        "message": "准时",
-//                        "id": 12,
-//                        "pubTime": "2016-11-21",
-//                        "uid": 4,
-//                        "curtMember": 2,
-//                        "startTime_min_min": "00",
-//                        "startDate": "2016-11-21",
-//                        "startTime_max_min": "20",
-//                        "startPos": "西电南校区",
-//                        "startTime_min_hour": "13",
-//                        "startTime_max_hour": "17",
-//                        "maxMember": 5,
-//                        "arrivePos": "航天城站"
-//                    }, {
-//                        "message": "妹子",
-//                        "id": 13,
-//                        "pubTime": "2016-11-21",
-//                        "uid": 4,
-//                        "curtMember": 1,
-//                        "startTime_min_min": "10",
-//                        "startDate": "2016-11-21",
-//                        "startTime_max_min": "30",
-//                        "startPos": "火车站",
-//                        "startTime_min_hour": "13",
-//                        "startTime_max_hour": "15",
-//                        "maxMember": 4,
-//                        "arrivePos": "航天城"
-//                    }, {
-//                        "message": ".。。。。----djegdgs。",
-//                        "id": 14,
-//                        "pubTime": "2016-11-21",
-//                        "uid": 4,
-//                        "curtMember": 2,
-//                        "startTime_min_min": "10",
-//                        "startDate": "2016-11-21",
-//                        "startTime_max_min": "30",
-//                        "startPos": "西电南校区",
-//                        "startTime_min_hour": "13",
-//                        "startTime_max_hour": "15",
-//                        "maxMember": 5,
-//                        "arrivePos": "航天城站"
-//                    }, {
-//                        "message": "要求：行李少。。",
-//                        "id": 15,
-//                        "pubTime": "2016-11-21",
-//                        "uid": 11,
-//                        "curtMember": 2,
-//                        "startTime_min_min": "10",
-//                        "startDate": "2016-11-21",
-//                        "startTime_max_min": "30",
-//                        "startPos": "咸阳机场",
-//                        "startTime_min_hour": "13",
-//                        "startTime_max_hour": "19",
-//                        "maxMember": 5,
-//                        "arrivePos": "西电南校区"
-//                    }, {
-//                        "message": "只要妹子哈哈哈 。。。。",
-//                        "id": 10,
-//                        "pubTime": "2016-11-15",
-//                        "uid": 3,
-//                        "curtMember": 4,
-//                        "startTime_min_min": "30",
-//                        "startDate": "2016-11-13",
-//                        "startTime_max_min": "30",
-//                        "startPos": "钟楼站",
-//                        "startTime_min_hour": "13",
-//                        "startTime_max_hour": "14",
-//                        "maxMember": 5,
-//                        "arrivePos": "西电南校区"
-//                    }, {
-//                        "message": "只要妹子哈哈哈 。。。。",
-//                        "id": 11,
-//                        "pubTime": "2016-11-15",
-//                        "uid": 3,
-//                        "curtMember": 4,
-//                        "startTime_min_min": "30",
-//                        "startDate": "2016-11-13",
-//                        "startTime_max_min": "30",
-//                        "startPos": "钟楼站",
-//                        "startTime_min_hour": "13",
-//                        "startTime_max_hour": "14",
-//                        "maxMember": 5,
-//                        "arrivePos": "火车站"
-//                    }, {
-//                        "message": "没什么要求，2333",
-//                        "id": 5,
-//                        "pubTime": "2016-11-13",
-//                        "uid": 3,
-//                        "curtMember": 1,
-//                        "startTime_min_min": "30",
-//                        "startDate": "2016-11-13",
-//                        "startTime_max_min": "30",
-//                        "startPos": "航天城地铁站",
-//                        "startTime_min_hour": "13",
-//                        "startTime_max_hour": "14",
-//                        "maxMember": 6,
-//                        "arrivePos": "西电北校区"
-//                    }, {
-//                        "message": "没什么要求，2333",
-//                        "id": 6,
-//                        "pubTime": "2016-11-13",
-//                        "uid": 3,
-//                        "curtMember": 1,
-//                        "startTime_min_min": "30",
-//                        "startDate": "2016-11-13",
-//                        "startTime_max_min": "30",
-//                        "startPos": "航天城地铁站",
-//                        "startTime_min_hour": "13",
-//                        "startTime_max_hour": "14",
-//                        "maxMember": 6,
-//                        "arrivePos": "西电北校区"
-//                    }, {
-//                        "message": "行李有点多",
-//                        "id": 8,
-//                        "pubTime": "2016-11-13",
-//                        "uid": 3,
-//                        "curtMember": 4,
-//                        "startTime_min_min": "00",
-//                        "startDate": "2016-11-13",
-//                        "startTime_max_min": "00",
-//                        "startPos": "西电北校区",
-//                        "startTime_min_hour": "18",
-//                        "startTime_max_hour": "19",
-//                        "maxMember": 6,
-//                        "arrivePos": "西电南校区"
-//                    }, {
-//                        "message": "我人很准时",
-//                        "id": 2,
-//                        "pubTime": "2016-11-09",
-//                        "uid": 1,
-//                        "curtMember": 3,
-//                        "startTime_min_min": "20",
-//                        "startDate": "2016-11-09",
-//                        "startTime_max_min": "59",
-//                        "startPos": "西电南校区",
-//                        "startTime_min_hour": "18",
-//                        "startTime_max_hour": "23",
-//                        "maxMember": 6,
-//                        "arrivePos": "火车站"
-//                    }, {
-//                        "message": "行李多",
-//                        "id": 3,
-//                        "pubTime": "2016-11-09",
-//                        "uid": 1,
-//                        "curtMember": 3,
-//                        "startTime_min_min": "00",
-//                        "startDate": "2016-11-09",
-//                        "startTime_max_min": "59",
-//                        "startPos": "西电南校区",
-//                        "startTime_min_hour": "06",
-//                        "startTime_max_hour": "23",
-//                        "maxMember": 6,
-//                        "arrivePos": "西电北校区"
-//                    }, {
-//                        "message": "我人很准时",
-//                        "id": 1,
-//                        "pubTime": "2016-11-08",
-//                        "uid": 1,
-//                        "curtMember": 3,
-//                        "startTime_min_min": "00",
-//                        "startDate": "2016-11-08",
-//                        "startTime_max_min": "59",
-//                        "startPos": "西电南校区",
-//                        "startTime_min_hour": "22",
-//                        "startTime_max_hour": "23",
-//                        "maxMember": 6,
-//                        "arrivePos": "火车站"
-//                    }];
-//                    for (var i = 0; i < 2; i++) {
-//                        $('#dataUl')
-//                            .append(
-//                                '<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
-//                                + carData[i].startDate
-//                                + '</span><span class="time-time startTime">'
-//                                + carData[i].startTime_min_hour
-//                                + ':'
-//                                + carData[i].startTime_min_min
-//                                + '-'
-//                                + carData[i].startTime_max_hour
-//                                + ':'
-//                                + carData[i].startTime_max_min
-//                                + '</span></div><div class="information-where"><span>出发:<span class="where-start startPos">'
-//                                + carData[i].startPos
-//                                + '</span></span><span class="where-end">到达:</span><span class="where-finish arrivePos">'
-//                                + carData[i].arrivePos
-//                                + '</span></div><div class="information-people"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="people-number">上限<p class="maxMember" style="display: inline;">'
-//                                + carData[i].maxMember
-//                                + '</p>人，已有<p class="curtMember"  style="display: inline;">'
-//                                + carData[i].curtMember
-//                                + '</p>人</span></div><div class="information-remark"><span>备注:</span><span class="remark-content message">'
-//                                + carData[i].message
-//                                + '</span></div><div class="information-issue">发布于<span class="issue-date pubtime">'
-//                                + carData[i].pubTime
-//                                + '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名<p  id="carId" hidden>' + carData[i].id + '</p></button></div></div></li>'
-//                            );
-////                            console.log('1');
-//                        var m = i + 1;
-//                        $self = $('.list-unstyled li:eq(' + m + ')');
-////                        console.log($self.find('#carId').html());
-//                        addperson(carData[i].maxMember, $self);
-//                        addcolor(carData[i].curtMember, $self);
-//                        carData1=carData;
-//                    }
-//                    console.log('刷新两个');
-//                }
             error:function () {
                 alert('net wrong');
             }
@@ -389,16 +172,14 @@
             });
 
     };//首次进入的刷新
-
     fresh_page();
-
     sessionStorage.setItem("timer", true);//真爱大巴引导判断
-
     $("#rili-date").change(function () {
         $('.list-unstyled').children('.child').remove();
 
         fresh_page();
 
+        $.getScript('js/btn.js');//重加载js
         var $date = $('#rili-date').val();
         var $arr = ['2017-01-13', '2017-01-14', '2017-01-15',
             '2017-01-16'];
@@ -410,11 +191,6 @@
             }
         }
     });//选择日期刷新
-
-
-    var ticker = 0;//计算完整循环复制次数
-    var ticker2 = 0;//阻止重复刷新
-
     refresher.init({
         id: "wrapper",//<------------------------------------------------------------------------------------┐
         pullDownAction: Refresh,
@@ -427,14 +203,20 @@
                 //上拉刷新
                 $.ajax({
                     type: 'post',
-                    url: 'servlet/IndexServlet',
+                    url: 'servlet/StartDateServlet',
                     dataType: 'json',
+                    data:{
+                      'startDate':$('#rili-date').val()
+                    },
                     success: function (data) {
                         //alert(data[1].message);
-                        $('body').append("<script src='js/1.js'><\/script>");
+//                        $('body').append("<script src='js/1.js'><\/script>");
+                        ticker2=0;
+                        ticker3=0;
                         var carData = data;
-                        $('.list-unstyled').children('.child').remove();										//remove function!!!!
-                        for (var i = 0; i < data.length; ++i) {
+                         $.getScript('js/btn.js');//重加载js
+                        $('.list-unstyled').children('.child').remove();//remove function!!!!
+                        for (var i = 0; i < 2; i++) {
                             $('#dataUl')
                                 .append(
                                     '<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
@@ -463,27 +245,37 @@
                                 );
                             var m = i + 1;
                             $self = $('.list-unstyled li:eq(' + m + ')');
+                            if(data[i].maxMember==data[i].curtMember){
+                                disBtn($self);
+                            }
                             addperson(carData[i].maxMember, $self);
                             addcolor(carData[i].curtMember, $self);
+  //                          $.getScript('js/btn.js');//重加载js
                         }
-                        return j = 2;//重置data的下标
+                        carData1=carData;//返回新数据
+
                     },
                     error: function () {
-                        console.log('net wrong');
+                        alert('net wrong');
                     }
                 });
+                
                 wrapper.refresh();
                 /****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
             }, 1000);
 
     }//刷新函数
-
     function Load() {
         setTimeout(function () {// <-- Simulate network congestion, remove setTimeout from production!
             //上拉加载更多数据
             //函数写这
 //            alert(carData1.length);
-            var length = carData1.length - 3;
+			//重加载js
+            if(ticker3==0){
+                $('.list-unstyled').children('.child').remove();//remove function!!!!
+                ticker3=1;
+            }
+            var length = carData1.length -1;
             for (var i = 0; i <= 9; i++) {
                 if (ticker * 10 + i > length || ticker2 == 1) {
                     //没有更多数据
@@ -498,36 +290,39 @@
                     $('#dataUl')
                         .append(
                             '<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
-                            + carData1[j].startDate
+                            + carData1[i].startDate
                             + '</span><span class="time-time startTime">'
-                            + carData1[j].startTime_min_hour
+                            + carData1[i].startTime_min_hour
                             + ':'
-                            + carData1[j].startTime_min_min
+                            + carData1[i].startTime_min_min
                             + '-'
-                            + carData1[j].startTime_max_hour
+                            + carData1[i].startTime_max_hour
                             + ':'
-                            + carData1[j].startTime_max_min
+                            + carData1[i].startTime_max_min
                             + '</span></div><div class="information-where"><span>出发:<span class="where-start startPos">'
-                            + carData1[j].startPos
+                            + carData1[i].startPos
                             + '</span></span><span class="where-end">到达:</span><span class="where-finish arrivePos">'
-                            + carData1[j].arrivePos
+                            + carData1[i].arrivePos
                             + '</span></div><div class="information-people"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="people-number">上限<p class="maxMember" style="display: inline;">'
-                            + carData1[j].maxMember
+                            + carData1[i].maxMember
                             + '</p>人，已有<p class="curtMember"  style="display: inline;">'
-                            + carData1[j].curtMember
+                            + carData1[i].curtMember
                             + '</p>人</span></div><div class="information-remark"><span>备注:</span><span class="remark-content message">'
-                            + carData1[j].message
+                            + carData1[i].message
                             + '</span></div><div class="information-issue">发布于<span class="issue-date pubtime">'
-                            + carData1[j].pubTime
-                            + '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名<p  id="carId" hidden>' + carData1[j].id + '</p></button></div></div></li>'
+                            + carData1[i].pubTime
+                            + '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名<p  id="carId" hidden>' + carData1[i].id + '</p></button></div></div></li>'
                         );
-                    var m = j + 1;
+                    var m = i + 1;
                     $self = $('.list-unstyled li:eq(' + m + ')');
-                    addperson(carData1[j].maxMember, $self);
-                    addcolor(carData1[j].curtMember, $self);
-                    j += 1;
+                    if(data[i].maxMember==data[i].curtMember){
+                        disBtn($self);
+                    }
+                    addperson(carData1[i].maxMember, $self);
+                    addcolor(carData1[i].curtMember, $self);
                 }
             }
+            
             ticker += 1;
             wrapper.refresh();
             /****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
@@ -535,6 +330,7 @@
         }, 0);
 
     }//加载函数
+    $.getScript('js/btn.js');
 </script>
 
 </body>

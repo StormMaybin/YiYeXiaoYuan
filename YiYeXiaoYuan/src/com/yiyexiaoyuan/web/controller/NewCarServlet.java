@@ -12,7 +12,8 @@ import net.sf.json.JSONObject;
 import com.yiyexiaoyuan.dao.impl.UserDaoImpl;
 import com.yiyexiaoyuan.domain.Information;
 import com.yiyexiaoyuan.formbean.InformationForm;
-import com.yiyexiaoyuan.service.impl.InformationService;
+import com.yiyexiaoyuan.service.InformationService;
+import com.yiyexiaoyuan.service.impl.InformationServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
 
 public class NewCarServlet extends HttpServlet
@@ -57,7 +58,7 @@ public class NewCarServlet extends HttpServlet
 			System.out.println(i);
 			if (i != null)
 			{
-				InformationService service = new InformationService();
+				InformationService service = new InformationServiceImpl();
 				
 				//开始添加行程
 				System.out.println("开始添加");

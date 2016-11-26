@@ -3,7 +3,8 @@ package com.yiyexiaoyuan.web.controller;
 import com.yiyexiaoyuan.dao.impl.UserDaoImpl;
 import com.yiyexiaoyuan.domain.User;
 import com.yiyexiaoyuan.formbean.LoginForm;
-import com.yiyexiaoyuan.service.impl.UserService;
+import com.yiyexiaoyuan.service.UserService;
+import com.yiyexiaoyuan.service.impl.UserServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,7 +36,7 @@ public class LoginServlet extends HttpServlet
 
 		User user = null;
 		LoginForm form = new LoginForm();
-		UserService service = new UserService();
+		UserService service = new UserServiceImpl();
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
 

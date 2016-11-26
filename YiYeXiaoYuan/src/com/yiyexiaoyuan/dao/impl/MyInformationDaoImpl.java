@@ -64,7 +64,7 @@ public class MyInformationDaoImpl implements MyInformationDao
 				//添加到集合中去
 				list.add(i);
 			}
-			//按照发布日期进行排序
+			//按照开始日期进行排序
 			Collections.sort(list);
 			//返回
 			return list;

@@ -23,5 +23,13 @@ public interface UserInfoDao
 	 * @return ArrayList
 	 */
 	public abstract ArrayList<UserInfo> queryUserInfo();
+	
+	/**
+	 * 根据用户id查找购票信息
+	 * @author StormMaybin
+	 * @param iId
+	 * @return
+	 */
+	public abstract ArrayList<UserInfo> queryUserInfo (int uId);
 
 }

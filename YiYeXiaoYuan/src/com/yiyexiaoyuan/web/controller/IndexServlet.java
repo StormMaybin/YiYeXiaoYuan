@@ -1,7 +1,8 @@
 package com.yiyexiaoyuan.web.controller;
 
 import com.yiyexiaoyuan.domain.Information;
-import com.yiyexiaoyuan.service.impl.InformationService;
+import com.yiyexiaoyuan.service.InformationService;
+import com.yiyexiaoyuan.service.impl.InformationServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class IndexServlet extends HttpServlet
 		request.setCharacterEncoding("UTF-8");
 
 		//创建服务对象
-		InformationService service = new InformationService();
+		InformationService service = new InformationServiceImpl();
 		
 		//创建集合对象
 		ArrayList<Information> list = service.queryInformationService();

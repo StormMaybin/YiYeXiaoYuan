@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import com.yiyexiaoyuan.service.impl.SendMessageService;
+import com.yiyexiaoyuan.service.SendMessageService;
+import com.yiyexiaoyuan.service.impl.SendMessageServiceImpl;
 
 public class ValidateServlet extends HttpServlet
 {
@@ -25,7 +26,7 @@ public class ValidateServlet extends HttpServlet
 		//得到要发送验证码的手机号码
 		String mobile = request.getParameter("mobile");
 		PrintWriter out = response.getWriter();
-		SendMessageService service = new SendMessageService();
+		SendMessageService service = new SendMessageServiceImpl();
 		
 		String code = null;
 		code = service.sendMessage(mobile);

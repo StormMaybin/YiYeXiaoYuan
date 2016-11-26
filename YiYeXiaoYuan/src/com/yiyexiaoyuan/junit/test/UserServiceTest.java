@@ -5,7 +5,8 @@ import com.yiyexiaoyuan.dao.impl.UserDaoImpl;
 import com.yiyexiaoyuan.domain.User;
 import com.yiyexiaoyuan.exception.CannotAlterUserNameException;
 import com.yiyexiaoyuan.exception.UserExitException;
-import com.yiyexiaoyuan.service.impl.UserService;
+import com.yiyexiaoyuan.service.UserService;
+import com.yiyexiaoyuan.service.impl.UserServiceImpl;
 import org.junit.Test;
 
 public class UserServiceTest
@@ -13,7 +14,7 @@ public class UserServiceTest
 	@Test
 	public void RegisterServiceTest()
 	{
-		UserService service = new UserService();
+		UserService service = new UserServiceImpl();
 
 		User user = new User();
 		user.setMobile("13628902222");
@@ -31,7 +32,7 @@ public class UserServiceTest
 	@Test
 	public void loginServiceTest()
 	{
-		UserService service = new UserService();
+		UserService service = new UserServiceImpl();
 
 		User user = null;
 
@@ -50,7 +51,7 @@ public class UserServiceTest
 	@Test
 	public void resetPassWordServiceTest()
 	{
-		UserService service = new UserService();
+		UserService service = new UserServiceImpl();
 
 		User user = new User();
 		user.setMobile("18219281111");
@@ -66,7 +67,7 @@ public class UserServiceTest
 	@Test
 	public void updateUserNameServiceTest()
 	{
-		UserService service = new UserService();
+		UserService service = new UserServiceImpl();
 
 		User user = new User();
 		user.setMobile("18219281111");
@@ -94,7 +95,7 @@ public class UserServiceTest
 	@Test
 	public void updateQqServiceTest()
 	{
-		UserService service = new UserService();
+		UserService service = new UserServiceImpl();
 
 		User user = new User();
 		user.setMobile("13628902222");
@@ -108,7 +109,7 @@ public class UserServiceTest
 	@Test
 	public void isExitMobileServiceTest()
 	{
-		UserService service = new UserService();
+		UserService service = new UserServiceImpl();
 		boolean isExit = service.isExitMobile("18292817803");
 		System.out.println(isExit);
 	}

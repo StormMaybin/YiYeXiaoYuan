@@ -1,5 +1,7 @@
 package com.yiyexiaoyuan.junit.test;
 
+import java.util.ArrayList;
+
 import com.yiyexiaoyuan.dao.MemberDao;
 import com.yiyexiaoyuan.dao.impl.MemberDaoImpl;
 import org.junit.Test;
@@ -35,4 +37,16 @@ public class MemberDaoTest
 			System.out.println("取消不成功");
 		}
 	}
+	@Test
+	public void queryUserTest ()
+	{	
+		ArrayList<com.yiyexiaoyuan.domain.User> list = new MemberDaoImpl().queryUser(15);
+		if (list != null)
+		{
+			for (com.yiyexiaoyuan.domain.User u : list)
+			{
+				System.out.println(u);
+			}
+		}
+	}	
 }

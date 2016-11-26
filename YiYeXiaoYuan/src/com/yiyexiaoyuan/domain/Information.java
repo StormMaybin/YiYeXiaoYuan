@@ -141,11 +141,11 @@ public class Information implements Comparable<Information> , Serializable
 	}
 	public int compareTo(Information o)
 	{
-		if (this.getPubTime().getTime() > o.getPubTime().getTime())
+		if (this.getStartDate().getTime() > o.getStartDate().getTime())
 		{
 			return -1;
 		}
-		else if (this.getPubTime().getTime() < o.getPubTime().getTime())
+		else if (this.getStartDate().getTime() < o.getStartDate().getTime())
 		{
 			return 1;
 		}

@@ -8,7 +8,8 @@ import java.util.Date;
 import org.junit.Test;
 
 import com.yiyexiaoyuan.domain.Information;
-import com.yiyexiaoyuan.service.impl.InformationService;
+import com.yiyexiaoyuan.service.InformationService;
+import com.yiyexiaoyuan.service.impl.InformationServiceImpl;
 
 public class InformationServiceTest
 {
@@ -32,7 +33,7 @@ public class InformationServiceTest
 		i.setMessage("只要妹子哈哈哈 。。。。");
 		i.setPubTime(new Date());
 		
-		InformationService service = new InformationService();
+		InformationService service = new InformationServiceImpl();
 		boolean result = service.addInformationService(i);
 		if (result)
 		{
@@ -50,7 +51,7 @@ public class InformationServiceTest
 		ArrayList<Information> list = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
-		InformationService service = new InformationService();
+		InformationService service = new InformationServiceImpl();
 		
 		list = service.queryByPubTimeService(sdf.parse("2016-11-13"));
 		
@@ -72,7 +73,7 @@ public class InformationServiceTest
 	public void queryInformationServiceTest ()
 	{
 		ArrayList<Information> list = null;
-		InformationService service = new InformationService();
+		InformationService service = new InformationServiceImpl();
 		
 		list = service.queryInformationService();
 		

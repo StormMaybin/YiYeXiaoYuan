@@ -13,7 +13,8 @@ import net.sf.json.JSONObject;
 import com.yiyexiaoyuan.domain.User;
 import com.yiyexiaoyuan.exception.UserExitException;
 import com.yiyexiaoyuan.formbean.RegisterForm;
-import com.yiyexiaoyuan.service.impl.UserService;
+import com.yiyexiaoyuan.service.UserService;
+import com.yiyexiaoyuan.service.impl.UserServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
 
 public class RegisterServlet extends HttpServlet
@@ -69,7 +70,7 @@ public class RegisterServlet extends HttpServlet
 					// 开始注册
 					try
 					{
-						service = new UserService();
+						service = new UserServiceImpl();
 						// 调用注册服务
 						boolean result = service.registerService(user);
 						if (result)

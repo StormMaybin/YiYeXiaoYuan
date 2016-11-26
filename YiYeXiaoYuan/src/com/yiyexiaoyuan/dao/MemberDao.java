@@ -1,5 +1,10 @@
 package com.yiyexiaoyuan.dao;
 
+import java.util.ArrayList;
+
+import com.yiyexiaoyuan.domain.Member;
+import com.yiyexiaoyuan.domain.User;
+
 public abstract interface MemberDao
 {
 	/**
@@ -19,4 +24,20 @@ public abstract interface MemberDao
 	 * @param uId iId
 	 */
 	public abstract boolean removeMember(int uId, int iId);
+	
+	/**
+	 * 根据拼车信息Id查找联系人信息
+	 * @author StormMaybin
+	 * @param iId
+	 * @return
+	 */
+	public abstract ArrayList<User> queryUser(int iId);
+	
+	/**
+	 * 根据拼车信息id，查出拼车信息的成员
+	 * @author StormMaybin
+	 * @param iId
+	 * @return
+	 */
+	public abstract Member queryByMainId(int iId);
 }

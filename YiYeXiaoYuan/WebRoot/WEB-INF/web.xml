@@ -57,6 +57,31 @@
     <servlet-name>MInformationServlet</servlet-name>
     <servlet-class>com.yiyexiaoyuan.web.controller.MInformationServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>QueryUserServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.QueryUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>QueryUserInfoServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.QueryUserInfoServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CancelInformationServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.CancelInformationServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>StartDateServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.StartDateServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SignUpInformationServlet</servlet-name>
+    <servlet-class>com.yiyexiaoyuan.web.controller.SignUpInformationServlet</servlet-class>
+  </servlet>
+
+
+
+
+
 
 
 
@@ -121,6 +146,26 @@
   <servlet-mapping>
     <servlet-name>MInformationServlet</servlet-name>
     <url-pattern>/servlet/MInformationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QueryUserServlet</servlet-name>
+    <url-pattern>/servlet/QueryUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QueryUserInfoServlet</servlet-name>
+    <url-pattern>/servlet/QueryUserInfoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CancelInformationServlet</servlet-name>
+    <url-pattern>/servlet/CancelInformationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StartDateServlet</servlet-name>
+    <url-pattern>/servlet/StartDateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SignUpInformationServlet</servlet-name>
+    <url-pattern>/servlet/SignUpInformationServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
