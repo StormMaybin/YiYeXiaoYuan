@@ -86,13 +86,14 @@
     </div>
 </div>
 <script  src="js/1.js"></script>
+<script  id='btn_spt' src="js/btn.js"></script>
 <script>
     console.log('y');
     var $self;
+    var j;//加载时所用控制下标变量
     var carData1;//全局变量
     var ticker = 0;//计算完整循环复制次数
     var ticker2 = 0;//阻止重复刷新
-    var ticker3=0;//第一次加载时移除前两个数据
     var addperson = function (num, $this1) {
         for (var i = 0; i < num; i++) {
             $this1.find('.information-people>span:eq(' + i + ')').addClass(
@@ -110,6 +111,10 @@
         css("background-color", "#000000").
         attr('disabled', 'disabled').
         html('人数已满');
+    };//提示人数已满
+    var scriptReload=function () {
+        $('#btn_spt').remove();
+        $('body').append("<script id='btn_spt' src='js/btn.js'><\/script>");
     };
     var fresh_page = function () {
         $.ajax({
@@ -121,8 +126,7 @@
                 },
                 async: false,
                 success: function (data) {
-                    ticker2=0;
-                    ticker3=0;
+                    ticker2=0;//使其可以加载更多
                     var carData = data;
                     for (var i = 0; i < 2; i++) {	
                        $('#dataUl')
@@ -160,8 +164,10 @@
                         addperson(carData[i].maxMember, $self);
                         addcolor(carData[i].curtMember, $self);
                     }
+                    j=2;//初始化加载拿数据下标
                     carData1 = carData;
 //                    $.getScript('js/btn.js');//重加载js
+                    scriptReload();
                     
                     return true;
                 },
@@ -171,15 +177,14 @@
 
             });
 
-    };//首次进入的刷新
-    fresh_page();
+    };//首次进入的刷新的函数
+    fresh_page();//首次进入刷新
     sessionStorage.setItem("timer", true);//真爱大巴引导判断
     $("#rili-date").change(function () {
         $('.list-unstyled').children('.child').remove();
 
         fresh_page();
 
-        $.getScript('js/btn.js');//重加载js
         var $date = $('#rili-date').val();
         var $arr = ['2017-01-13', '2017-01-14', '2017-01-15',
             '2017-01-16'];
@@ -212,9 +217,7 @@
                         //alert(data[1].message);
 //                        $('body').append("<script src='js/1.js'><\/script>");
                         ticker2=0;
-                        ticker3=0;
                         var carData = data;
-                         $.getScript('js/btn.js');//重加载js
                         $('.list-unstyled').children('.child').remove();//remove function!!!!
                         for (var i = 0; i < 2; i++) {
                             $('#dataUl')
@@ -252,6 +255,8 @@
                             addcolor(carData[i].curtMember, $self);
   //                          $.getScript('js/btn.js');//重加载js
                         }
+                        j=2;
+                        scriptReload();
                         carData1=carData;//返回新数据
 
                     },
@@ -271,11 +276,11 @@
             //函数写这
 //            alert(carData1.length);
 			//重加载js
-            if(ticker3==0){
-                $('.list-unstyled').children('.child').remove();//remove function!!!!
-                ticker3=1;
-            }
-            var length = carData1.length -1;
+//            if(ticker3==0){
+//                $('.list-unstyled').children('.child').remove();//remove function!!!!
+//                ticker3=1;
+//            }
+            var length = carData1.length -3;
             for (var i = 0; i <= 9; i++) {
                 if (ticker * 10 + i > length || ticker2 == 1) {
                     //没有更多数据
@@ -290,48 +295,47 @@
                     $('#dataUl')
                         .append(
                             '<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
-                            + carData1[i].startDate
+                            + carData1[j].startDate
                             + '</span><span class="time-time startTime">'
-                            + carData1[i].startTime_min_hour
+                            + carData1[j].startTime_min_hour
                             + ':'
-                            + carData1[i].startTime_min_min
+                            + carData1[j].startTime_min_min
                             + '-'
-                            + carData1[i].startTime_max_hour
+                            + carData1[j].startTime_max_hour
                             + ':'
-                            + carData1[i].startTime_max_min
+                            + carData1[j].startTime_max_min
                             + '</span></div><div class="information-where"><span>出发:<span class="where-start startPos">'
-                            + carData1[i].startPos
+                            + carData1[j].startPos
                             + '</span></span><span class="where-end">到达:</span><span class="where-finish arrivePos">'
-                            + carData1[i].arrivePos
+                            + carData1[j].arrivePos
                             + '</span></div><div class="information-people"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="people-number">上限<p class="maxMember" style="display: inline;">'
-                            + carData1[i].maxMember
+                            + carData1[j].maxMember
                             + '</p>人，已有<p class="curtMember"  style="display: inline;">'
-                            + carData1[i].curtMember
+                            + carData1[j].curtMember
                             + '</p>人</span></div><div class="information-remark"><span>备注:</span><span class="remark-content message">'
-                            + carData1[i].message
+                            + carData1[j].message
                             + '</span></div><div class="information-issue">发布于<span class="issue-date pubtime">'
-                            + carData1[i].pubTime
-                            + '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名<p  id="carId" hidden>' + carData1[i].id + '</p></button></div></div></li>'
+                            + carData1[j].pubTime
+                            + '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名<p  id="carId" hidden>' + carData1[j].id + '</p></button></div></div></li>'
                         );
-                    var m = i + 1;
+                    var m = j + 1;
                     $self = $('.list-unstyled li:eq(' + m + ')');
-                    if(data[i].maxMember==data[i].curtMember){
+                    if(data[j].maxMember==data[j].curtMember){
                         disBtn($self);
                     }
-                    addperson(carData1[i].maxMember, $self);
-                    addcolor(carData1[i].curtMember, $self);
+                    addperson(carData1[j].maxMember, $self);
+                    addcolor(carData1[j].curtMember, $self);
                 }
+                j+=1;
             }
-            
+            scriptReload();
             ticker += 1;
             wrapper.refresh();
             /****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
 
-        }, 0);
+        }, 300);
 
     }//加载函数
-    $.getScript('js/btn.js');
 </script>
-
 </body>
 </html>

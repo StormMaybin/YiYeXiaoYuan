@@ -12,7 +12,7 @@ public class DBUtil
 	private static String url;
 	private static String user;
 	private static String pwd;
-	//staticÓï¾ä¿é³õÊ¼»¯×Ö¶ÎÐÅÏ¢
+	//staticåŠ è½½
 	static
 	{
 		try 
@@ -27,21 +27,22 @@ public class DBUtil
 			url = "jdbc:mysql://localhost:3306/yiyexiaoyuan?useUnicode=true&characterEncoding=utf8";
 			user = "root";
 			pwd = "root";
+//			pwd = "StormMaybin@";
 		} 
 		catch (Exception e) 
 		{
-			throw new RuntimeException("¶ÁÈ¡Êý¾Ý¿âÅäÖÃÎÄ¼þ³öÏÖÒì³£", e);
+			throw new RuntimeException("ï¿½ï¿½È¡ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£", e);
 		}
 	}
 	
 	/**
-	 * »ñÈ¡ÓëÊý¾Ý¿âµÄÁ¬½Ó
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 * @throws Exception
 	 */
 	public static Connection getConnection()
 	{
-		//¼ÓÔØmysqlÇý¶¯
+		//ï¿½ï¿½ï¿½ï¿½mysqlï¿½ï¿½
 		try
 		{
 			Class.forName(driver);
@@ -49,7 +50,7 @@ public class DBUtil
 		catch (ClassNotFoundException e)
 		{
 			// TODO Auto-generated catch block
-			throw new RuntimeException("¼ÓÔØÊý¾Ý¿âÇý¶¯³öÏÖÒì³£", e);
+			throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£", e);
 		}
 		try
 		{
@@ -57,11 +58,11 @@ public class DBUtil
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
-			throw new RuntimeException("Á¬½ÓÊý¾Ý¿â³öÏÖÒì³£", e);
+			throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ì³£", e);
 		}
 	}
 	/**
-	 * ¹Ø±ÕÁ¬½Ó
+	 * ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param conn
 	 * @param stm
 	 * @param rs

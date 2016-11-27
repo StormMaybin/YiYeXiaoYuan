@@ -1,3 +1,14 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>s
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,7 +28,7 @@
 		<div class="one-inner-2">
 			<div class="peo-infor">
 				<img class="infor-pic" src="img/usr1.png" />
-				<input id="peo-user" type="text" readonly/>
+				<input id="peo-user" type="text" value="<!-- 151XXXXXXXX -->${user.userName}" readonly/>
 				<script>
 					$('#peo-user').on('tap click',function () {
 						window.location.href='inforChange.html';

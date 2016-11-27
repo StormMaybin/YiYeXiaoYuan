@@ -51,8 +51,8 @@ public class LoginServlet extends HttpServlet
 		if (user != null)
 		{
 			request.getSession().setAttribute("user", user);
-			System.out.println("登录成功");
-			System.out.println(user.toString());
+//			System.out.println("登录成功");
+//			System.out.println(user.toString());
 			json.accumulate("user", user);
 			json.accumulate("status", 1);
 			int isOk;

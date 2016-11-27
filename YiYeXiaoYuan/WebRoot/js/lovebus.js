@@ -21,7 +21,7 @@ $(function(){
 		            window.location.href='login.html'
 		        },1500);	
 					        
-			}else if(radio1==null||radio2==null||radio3==null||mes1==null||mes2==null){			//radio判断
+			}else if(radio1==null||radio2==null||radio3==null||mes1==""||mes2=="s"){			//radio判断
 				$('#dialog-radio').fadeIn(300);
 					setTimeout(function () {
 			     		$('#dialog-radio').fadeOut(300);

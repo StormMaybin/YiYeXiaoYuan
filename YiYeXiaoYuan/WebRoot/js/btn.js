@@ -7,13 +7,17 @@
 					$("#dialog-confirm").css("display", "none");
 					var enlist_error = function() {
 						$('#dialog-error').fadeIn(300);
+						that.attr('disabled',true);
 						setTimeout(function() {
+							that.attr('disabled',false);
 							$('#dialog-error').fadeOut(300);
-						}, 2000);
+						}, 500);
 					};// 不合报名规则
 					var enlist_success = function() {
+						that.attr('disabled',true);
 						$('#dialog-success').fadeIn(300);
 						setTimeout(function() {
+							that.attr('disabled',false);
 							$('#dialog-success').fadeOut(300);
 							window.location.href = 'myRoute.html';
 						}, 2000);
@@ -39,9 +43,10 @@
 								if(data.status==1){//success
 									enlist_success();
 									that.css("background-color", "#000000");
-									that.attr('disabled', 'disabled');
+									that.attr('disabled', true);
 									that.html('已报名');
                                     setTimeout(function() {
+                                    	that.attr('disabled',false);
                                     	window.location.href = 'myRoute.html';
                                     }, 2000);
 								}
@@ -50,9 +55,11 @@
 								}
 								if(data.status==-1){//已报名
                                     $('#dialog-error3').fadeIn(300);
+                                    that.attr('disabled',true);
                                     setTimeout(function() {
+                                    	that.attr('disabled',false);
                                         $('#dialog-error3').fadeOut(300);
-                                    }, 2000);
+                                    }, 500);
 								}
 							},
 							error : function() {
@@ -66,9 +73,11 @@
 						//点击报名未登录
                         // console.log(that.find('#carId').html());
 						$('#dialog-login').fadeIn(300);
+						that.attr('disabled',true);
 						setTimeout(function() {
+							that.attr('disabled',false);
 							location.href = 'login.html';
-						}, 2000)
+						}, 500)
 					}
 
 				});//选择报名
