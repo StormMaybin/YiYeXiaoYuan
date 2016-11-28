@@ -26,7 +26,7 @@ public class IndexServlet extends HttpServlet
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-		System.out.println("请求");
+		System.out.println("IndesServlet：");
 		response.setContentType("application/json; charset=utf-8");
 		//设置编码格式
 		request.setCharacterEncoding("UTF-8");

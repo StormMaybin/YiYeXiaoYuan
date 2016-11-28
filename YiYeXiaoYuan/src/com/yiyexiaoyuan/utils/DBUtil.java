@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.log4j.Logger;
+
+
 public class DBUtil 
 {
 	private static String driver;
 	private static String url;
 	private static String user;
 	private static String pwd;
+	public static Logger logger = Logger.getLogger(DBUtil.class);
 	//static加载
 	static
 	{
@@ -31,18 +35,20 @@ public class DBUtil
 		} 
 		catch (Exception e) 
 		{
-			throw new RuntimeException("��ȡ��ݿ������ļ������쳣", e);
+			logger.error(e);
+			throw new RuntimeException(e);
 		}
 	}
 	
 	/**
-	 * ��ȡ����ݿ������
+	 * 获得数据库连接
+	 * @author StormMaybin
 	 * @return
 	 * @throws Exception
 	 */
 	public static Connection getConnection()
 	{
-		//����mysql��
+		//加载数据库
 		try
 		{
 			Class.forName(driver);
@@ -50,15 +56,17 @@ public class DBUtil
 		catch (ClassNotFoundException e)
 		{
 			// TODO Auto-generated catch block
-			throw new RuntimeException("������ݿ�������쳣", e);
+			logger.error(e);
+			throw new RuntimeException(e);
 		}
 		try
 		{
 			return DriverManager.getConnection(url, user, pwd);
 		} catch (SQLException e)
 		{
+			logger.error(e);
 			// TODO Auto-generated catch block
-			throw new RuntimeException("������ݿ�����쳣", e);
+			throw new RuntimeException(e);
 		}
 	}
 	/**
@@ -80,6 +88,7 @@ public class DBUtil
 		} 
 		catch (Exception e) 
 		{
+			logger.error(e);
 			e.printStackTrace();
 		}
 	}
@@ -94,6 +103,7 @@ public class DBUtil
 		} 
 		catch (Exception e) 
 		{
+			logger.error(e);
 			e.printStackTrace();
 		}
 	}

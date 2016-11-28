@@ -154,7 +154,7 @@ public class Information implements Comparable<Information> , Serializable
 			return 0;
 		}
 	}
-	@Override
+	/*@Override
 	public String toString()
 	{
 		StringBuilder stringBuilder = new StringBuilder();
@@ -194,5 +194,5 @@ public class Information implements Comparable<Information> , Serializable
 		stringBuilder.append(new java.sql.Date(pubTime.getTime()));
 		stringBuilder.append("\r\n");
 		return stringBuilder.toString();
-	}
+	}*/
 }

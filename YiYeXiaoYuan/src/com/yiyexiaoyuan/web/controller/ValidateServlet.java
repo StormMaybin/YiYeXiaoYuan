@@ -30,7 +30,9 @@ public class ValidateServlet extends HttpServlet
 		
 		String code = null;
 		code = service.sendMessage(mobile);
-		
+		/**
+		 * 给前台回送生成的验证码
+		 */
 		JSONObject json = new JSONObject();
 		json.accumulate("checkCode", code);
 		out.print(json.toString());

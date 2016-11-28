@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONObject;
 
 import com.yiyexiaoyuan.service.MemberService;
@@ -19,7 +21,7 @@ public class CancelInformationServlet extends HttpServlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public static Logger logger = Logger.getLogger(CancelInformationServlet.class);
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -29,7 +31,7 @@ public class CancelInformationServlet extends HttpServlet
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-		System.out.println("请求开始");
+		
 		// 设置编码格式
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=utf-8");
@@ -38,7 +40,6 @@ public class CancelInformationServlet extends HttpServlet
 		//用户id
 		int uId = Integer.parseInt(request.getParameter("uId"));
 		
-		System.out.println(iId+"  "+uId);
 		//创建服务对象
 		MemberService mservice = new MemberServiceImpl();
 		
@@ -51,7 +52,7 @@ public class CancelInformationServlet extends HttpServlet
 			json.accumulate("status", 1);
 			response.getWriter().print(json.toString());
 			response.getWriter().close();
-			System.out.println("取消成功");
+			logger.info("取消"+iId+"号行程成功");
 		}
 		else
 		{
@@ -59,7 +60,7 @@ public class CancelInformationServlet extends HttpServlet
 			json.accumulate("status", 0);
 			response.getWriter().print(json.toString());
 			response.getWriter().close();
-			System.out.println("取消失败");
+			logger.info("取消"+iId+"号行程失败");
 		}
 	}
 }

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONObject;
 
 
@@ -24,6 +26,7 @@ public class updateUserNameServlet extends HttpServlet
 	/**
 	 * 
 	 */
+	public static Logger logger = Logger.getLogger(updateUserNameServlet.class);
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -60,8 +63,8 @@ public class updateUserNameServlet extends HttpServlet
 			} 
 			catch (CannotAlterUserNameException e)
 			{
-				// 处理没有修改权限的情况
-				System.out.println("不能修改");
+				//前台已做判断
+				logger.info("不能修改用户名");
 			} 
 			catch (UserExitException e)
 			{

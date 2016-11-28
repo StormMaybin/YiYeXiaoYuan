@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONObject;
 
 import com.yiyexiaoyuan.dao.impl.UserDaoImpl;
@@ -23,6 +25,7 @@ public class TrueLoveServlet extends HttpServlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static Logger logger = Logger.getLogger(TrueLoveServlet.class);
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
@@ -36,7 +39,7 @@ public class TrueLoveServlet extends HttpServlet
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-		// request to formBean
+		// 封装到formBean
 		TrueLoveForm form = null;
 
 		form = WebUtils.request2Bean(request, TrueLoveForm.class);
@@ -44,17 +47,17 @@ public class TrueLoveServlet extends HttpServlet
 		// System.out.println(form.toString());
 
 		UserInfo userInfo = new UserInfo();
+		
 		// copy bean
 		WebUtils.copyBean(form, userInfo);
 
 		// System.out.println(new
 		// UserDaoImpl().findByMobile(form.getMobile()).getId());
+		
 		userInfo.setId(new UserDaoImpl().findByMobile(form.getMobile()).getId());
 
 		if (userInfo != null)
 		{
-
-			System.out.println(userInfo);
 
 			// 开始调用服务添加购票信息
 			UserInfoService service = new UserInfoServiceImpl();
@@ -66,12 +69,15 @@ public class TrueLoveServlet extends HttpServlet
 				json.accumulate("status", 1);
 				response.getWriter().print(json.toString());
 				response.getWriter().close();
-			} else
+				logger.info("大巴购票成功");
+			} 
+			else
 			{
 				JSONObject json = new JSONObject();
 				json.accumulate("status", 0);
 				response.getWriter().print(json.toString());
 				response.getWriter().close();
+				logger.info("大巴购票失败");
 			}
 		}
 	}

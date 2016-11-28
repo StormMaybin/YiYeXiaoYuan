@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONArray;
 
 import com.yiyexiaoyuan.domain.Information;
@@ -24,6 +26,7 @@ public class StartDateServlet extends HttpServlet
 	/**
 	 * 
 	 */
+	public static Logger logger = Logger.getLogger(StartDateServlet.class);
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +44,6 @@ public class StartDateServlet extends HttpServlet
 		
 		String startDate = request.getParameter("startDate");
 
-//		System.out.println("startDate:"+startDate);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		InformationService service = new InformationServiceImpl();
 
@@ -56,11 +58,11 @@ public class StartDateServlet extends HttpServlet
 			PrintWriter out = response.getWriter();
 			out.print(json.toString());
 			out.close();
-//			System.out.println(json);
 		} 
 		catch (ParseException e)
 		{
 			// TODO Auto-generated catch block
+			logger.error(e);
 			throw new RuntimeException(e);
 		}
 	}

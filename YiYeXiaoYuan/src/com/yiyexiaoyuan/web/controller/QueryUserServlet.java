@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONArray;
 
 import com.yiyexiaoyuan.domain.User;
@@ -16,6 +18,11 @@ import com.yiyexiaoyuan.service.MemberService;
 import com.yiyexiaoyuan.service.impl.MemberServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
 
+/**
+ * 查询成员信息的servlet
+ * @author StormMaybin
+ *
+ */
 public class QueryUserServlet extends HttpServlet
 {
 
@@ -23,7 +30,7 @@ public class QueryUserServlet extends HttpServlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public static Logger logger = Logger.getLogger(QueryUserServlet.class);
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -54,6 +61,11 @@ public class QueryUserServlet extends HttpServlet
 			PrintWriter out = response.getWriter();
 			out.print(array.toString());
 			out.close();
+		}
+		else
+		{
+			//永远不可能执行
+			logger.error("严重错误：member表查出空值");
 		}
 	}
 }

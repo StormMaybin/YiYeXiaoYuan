@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONObject;
 
 import com.yiyexiaoyuan.domain.User;
@@ -21,6 +23,7 @@ public class ResetPassWordServlet extends HttpServlet
 	/**
 	 * 
 	 */
+	public static Logger logger = Logger.getLogger(ResetPassWordServlet.class);
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,12 +54,11 @@ public class ResetPassWordServlet extends HttpServlet
 				PrintWriter out = response.getWriter();
 				out.print(json.toString());
 				out.close();
-				System.out.println("TYPE3");
 				return;
 			}
 			else//重置失败
 			{
-				
+				logger.error("重置密码失败");
 			}
 		}
 	}

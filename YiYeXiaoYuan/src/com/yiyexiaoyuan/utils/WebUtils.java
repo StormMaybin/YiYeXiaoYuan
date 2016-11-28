@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
+import org.apache.log4j.Logger;
+
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
@@ -17,6 +19,11 @@ import net.sf.json.processors.JsonValueProcessor;
 
 public class WebUtils
 {
+	/**
+	 * 产生日志记录器
+	 */
+	public static Logger logger = Logger.getLogger(WebUtils.class);
+	
 	public static <T> T request2Bean(HttpServletRequest request,
 			Class<T> beanClass)
 	{
@@ -29,25 +36,32 @@ public class WebUtils
 			bean = beanClass.newInstance();
 			while (e.hasMoreElements())
 			{
-				System.out.println("循环");
 				// request数据封装到bean
 				String name = (String) e.nextElement();
 				String value = request.getParameter(name);
 				try
 				{
 					BeanUtils.setProperty(bean, name, value);
-				} catch (InvocationTargetException e1)
+				} 
+				catch (InvocationTargetException e1)
 				{
+					System.out.println("失败1");
 					// 异常转型
+					logger.error(e);
 					throw new RuntimeException(e1);
 				}
 			}
-		} catch (InstantiationException e)
+		} 
+		catch (InstantiationException e)
 		{
+			logger.error(e);
 			// 异常转型
 			throw new RuntimeException(e);
-		} catch (IllegalAccessException e)
+		} 
+		catch (IllegalAccessException e)
 		{
+			System.out.println("失败2");
+			logger.error(e);
 			// 异常转型
 			throw new RuntimeException(e);
 		}
@@ -89,6 +103,7 @@ public class WebUtils
 					} 
 					catch (ParseException e)
 					{
+						logger.error(e);
 						// TODO Auto-generated catch block
 						System.out.println("转换异常");
 					}
@@ -101,10 +116,12 @@ public class WebUtils
 		catch (IllegalAccessException e)
 		{
 			// TODO Auto-generated catch block
+			logger.error(e);
 			throw new RuntimeException(e);
 		}
 		catch (InvocationTargetException e)
 		{
+			logger.error(e);
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
 		}
@@ -139,5 +156,4 @@ public class WebUtils
 				});
 		return jsonConfig;
 	}
-
 }

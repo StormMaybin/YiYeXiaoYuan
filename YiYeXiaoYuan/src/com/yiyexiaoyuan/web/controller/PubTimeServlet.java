@@ -6,11 +6,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import javax.lang.model.util.SimpleAnnotationValueVisitor6;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 
 import net.sf.json.JSONArray;
 
@@ -18,7 +19,11 @@ import com.yiyexiaoyuan.domain.Information;
 import com.yiyexiaoyuan.service.InformationService;
 import com.yiyexiaoyuan.service.impl.InformationServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
-
+/**
+ * 按照发布时间查询
+ * @author StormMaybin
+ *
+ */
 public class PubTimeServlet extends HttpServlet
 {
 
@@ -26,7 +31,7 @@ public class PubTimeServlet extends HttpServlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public static Logger logger = Logger.getLogger(PubTimeServlet.class);
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -42,7 +47,6 @@ public class PubTimeServlet extends HttpServlet
 		
 		String pubTime = request.getParameter("pubTime");
 
-		System.out.println("pubTime:"+pubTime);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		InformationService service = new InformationServiceImpl();
 
@@ -62,6 +66,7 @@ public class PubTimeServlet extends HttpServlet
 		catch (ParseException e)
 		{
 			// TODO Auto-generated catch block
+			logger.error(e);
 			throw new RuntimeException(e);
 		}
 	}

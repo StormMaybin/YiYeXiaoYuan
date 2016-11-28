@@ -12,6 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONObject;
 
 public class LoginServlet extends HttpServlet
@@ -20,7 +23,7 @@ public class LoginServlet extends HttpServlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public static Logger logger = Logger.getLogger(LoginServlet.class);
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -32,28 +35,24 @@ public class LoginServlet extends HttpServlet
 	{
 		response.setContentType("application/json; charset=utf-8");
 
-		System.out.println("第一次处理提交");
-
 		User user = null;
 		LoginForm form = new LoginForm();
 		UserService service = new UserServiceImpl();
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
 
-		System.out.println(request.getParameter("mobile   "
-				+ request.getParameter("passWord")));
 
 		form = (LoginForm) WebUtils.request2Bean(request, LoginForm.class);
-		System.out.println(form);
 
 		user = service.loginService(form.getMobile(), form.getPassWord());
 
 		if (user != null)
 		{
+			//登录成功的话，设置session域中存储这个user对象
 			request.getSession().setAttribute("user", user);
-//			System.out.println("登录成功");
-//			System.out.println(user.toString());
+			//向前台返回这个user对象
 			json.accumulate("user", user);
+			//向前台返返回登录成功的状态码
 			json.accumulate("status", 1);
 			int isOk;
 			if (new UserDaoImpl().isCanUpdateUserName(user))
@@ -64,15 +63,16 @@ public class LoginServlet extends HttpServlet
 			{
 				isOk = 1;
 			}
+			//向前台返回是否可以修改用户名的权限状态码
 			json.accumulate("nameChange", isOk);
-			System.out.println(isOk);
 			out.print(json.toString());
 			out.close();
 			return;
 		}
+		//说明登录失败
 		if (user == null)
 		{
-			System.out.println("user为空");
+			//表示由这个手机号，但是密码错误
 			if (service.isExitMobile(form.getMobile()))
 			{
 				System.out.println("0");
@@ -81,12 +81,13 @@ public class LoginServlet extends HttpServlet
 				out.close();
 				return;
 			}
-
-			System.out.println("-1");
-			json.accumulate("status", -1);
-			out.print(json.toString());
-			out.close();
-			return;
+			else//表示此手机号没有注册
+			{
+				json.accumulate("status", -1);
+				out.print(json.toString());
+				out.close();
+				return;
+			}
 		}
 	}
 }

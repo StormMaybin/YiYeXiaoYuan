@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -16,7 +18,11 @@ import com.yiyexiaoyuan.domain.UserInfo;
 import com.yiyexiaoyuan.service.UserInfoService;
 import com.yiyexiaoyuan.service.impl.UserInfoServiceImpl;
 import com.yiyexiaoyuan.utils.WebUtils;
-
+/**
+ * 查询大巴购票信息的servlet
+ * @author StormMaybin
+ *
+ */
 public class QueryUserInfoServlet extends HttpServlet
 {
 
@@ -24,7 +30,7 @@ public class QueryUserInfoServlet extends HttpServlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public static Logger logger = Logger.getLogger(QueryUserInfoServlet.class);
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{

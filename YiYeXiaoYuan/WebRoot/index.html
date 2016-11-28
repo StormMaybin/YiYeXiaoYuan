@@ -34,7 +34,7 @@
                     <label class="one-choose" for="rili-date"><span
                             class="glyphicon glyphicon-chevron-right"></span> </label> <input
                         type="text" class="one-date" id="rili-date"
-                         readonly/>
+                        readonly/>
                 </div>
                 <div id="trueLove"></div>
             </li>
@@ -85,12 +85,13 @@
         <span>取消</span> <span>进入</span>
     </div>
 </div>
-<script  src="js/1.js"></script>
-<script  id='btn_spt' src="js/btn.js"></script>
+<script src="js/1.js"></script>
+<script id='btn_spt' src="js/btn.js"></script>
 <script>
     console.log('y');
     var $self;
     var j;//加载时所用控制下标变量
+    var k;
     var carData1;//全局变量
     var ticker = 0;//计算完整循环复制次数
     var ticker2 = 0;//阻止重复刷新
@@ -107,75 +108,74 @@
         }
     };//  添加加入人数
     var disBtn = function ($this) {
-        $this.find('.issue-btn').
-        css("background-color", "#000000").
-        attr('disabled', 'disabled').
-        html('人数已满');
+        $this.find('.issue-btn').css("background-color", "#000000").attr('disabled', 'disabled').html('人数已满');
     };//提示人数已满
-    var scriptReload=function () {
+    var scriptReload = function () {
         $('#btn_spt').remove();
         $('body').append("<script id='btn_spt' src='js/btn.js'><\/script>");
     };
     var fresh_page = function () {
         $.ajax({
-                method: 'post',
-                url: 'servlet/StartDateServlet',
-                dataType: 'json',
-                data:{
-                  'startDate':$('#rili-date').val()
-                },
-                async: false,
-                success: function (data) {
-                    ticker2=0;//使其可以加载更多
-                    var carData = data;
-                    for (var i = 0; i < 2; i++) {	
-                       $('#dataUl')
-                                .append(
-                                    '<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
-                                    + carData[i].startDate
-                                    + '</span><span class="time-time startTime">'
-                                    + carData[i].startTime_min_hour
-                                    + ':'
-                                    + carData[i].startTime_min_min
-                                    + '-'
-                                    + carData[i].startTime_max_hour
-                                    + ':'
-                                    + carData[i].startTime_max_min
-                                    + '</span></div><div class="information-where"><span>出发:<span class="where-start startPos">'
-                                    + carData[i].startPos
-                                    + '</span></span><span class="where-end">到达:</span><span class="where-finish arrivePos">'
-                                    + carData[i].arrivePos
-                                    + '</span></div><div class="information-people"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="people-number">上限<p class="maxMember" style="display: inline;">'
-                                    + carData[i].maxMember
-                                    + '</p>人，已有<p class="curtMember"  style="display: inline;">'
-                                    + carData[i].curtMember
-                                    + '</p>人</span></div><div class="information-remark"><span>备注:</span><span class="remark-content message">'
-                                    + carData[i].message
-                                    + '</span></div><div class="information-issue">发布于<span class="issue-date pubtime">'
-                                    + carData[i].pubTime
-                                    + '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名<p  id="carId" hidden>' + carData[i].id + '</p></button></div></div></li>'
-                                ); 
+            method: 'post',
+            url: 'servlet/StartDateServlet',
+            dataType: 'json',
+            data: {
+                'startDate': $('#rili-date').val()
+            },
+            success: function (data) {
+                ticker2 = 0;//使其可以加载更多
+                var carData = data;
+                if(carData.length>2){k=2}else{
+                    k=carData.length;
+                }
+                for (var i = 0; i < k; i++) {
+                    $('#dataUl')
+                        .append(
+                            '<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
+                            + carData[i].startDate
+                            + '</span><span class="time-time startTime">'
+                            + carData[i].startTime_min_hour
+                            + ':'
+                            + carData[i].startTime_min_min
+                            + '-'
+                            + carData[i].startTime_max_hour
+                            + ':'
+                            + carData[i].startTime_max_min
+                            + '</span></div><div class="information-where"><span>出发:<span class="where-start startPos">'
+                            + carData[i].startPos
+                            + '</span></span><span class="where-end">到达:</span><span class="where-finish arrivePos">'
+                            + carData[i].arrivePos
+                            + '</span></div><div class="information-people"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="people-number">上限<p class="maxMember" style="display: inline;">'
+                            + carData[i].maxMember
+                            + '</p>人，已有<p class="curtMember"  style="display: inline;">'
+                            + carData[i].curtMember
+                            + '</p>人</span></div><div class="information-remark"><span>备注:</span><span class="remark-content message">'
+                            + carData[i].message
+                            + '</span></div><div class="information-issue">发布于<span class="issue-date pubtime">'
+                            + carData[i].pubTime
+                            + '</span></div><div class="information-button"><button href="#" role=button class="issue-btn btn btn-block sign-btn" id="">报名<p  id="carId" hidden>' + carData[i].id + '</p></button></div></div></li>'
+                        );
 //                            console.log('1');
-                        var m = i + 1;
-                        $self = $('.list-unstyled li:eq(' + m + ')');
-                        if(data[i].maxMember==data[i].curtMember){
-                            disBtn($self);
-                        }
-                        addperson(carData[i].maxMember, $self);
-                        addcolor(carData[i].curtMember, $self);
+                    var m = i + 1;
+                    $self = $('.list-unstyled li:eq(' + m + ')');
+                    if (data[i].maxMember == data[i].curtMember) {
+                        disBtn($self);
                     }
-                    j=2;//初始化加载拿数据下标
-                    carData1 = carData;
+                    addperson(carData[i].maxMember, $self);
+                    addcolor(carData[i].curtMember, $self);
+                }
+                j = 2;//初始化加载拿数据下标
+                carData1 = carData;
 //                    $.getScript('js/btn.js');//重加载js
-                    scriptReload();
-                    
-                    return true;
-                },
-            error:function () {
+                scriptReload();
+
+                return true;
+            },
+            error: function () {
                 alert('net wrong');
             }
 
-            });
+        });
 
     };//首次进入的刷新的函数
     fresh_page();//首次进入刷新
@@ -210,16 +210,20 @@
                     type: 'post',
                     url: 'servlet/StartDateServlet',
                     dataType: 'json',
-                    data:{
-                      'startDate':$('#rili-date').val()
+                    data: {
+                        'startDate': $('#rili-date').val()
                     },
                     success: function (data) {
                         //alert(data[1].message);
 //                        $('body').append("<script src='js/1.js'><\/script>");
-                        ticker2=0;
+                        ticker2 = 0;
                         var carData = data;
+                        if(carData.length>2){k=2}else{
+                            k=carData.length;
+                        }
+
                         $('.list-unstyled').children('.child').remove();//remove function!!!!
-                        for (var i = 0; i < 2; i++) {
+                        for (var i = 0; i < k; i++) {
                             $('#dataUl')
                                 .append(
                                     '<li class="child"><div class="one-information"><div class="information-time"><span>时间:</span><span class="time-date startDate">'
@@ -248,23 +252,23 @@
                                 );
                             var m = i + 1;
                             $self = $('.list-unstyled li:eq(' + m + ')');
-                            if(data[i].maxMember==data[i].curtMember){
+                            if (data[i].maxMember == data[i].curtMember) {
                                 disBtn($self);
                             }
                             addperson(carData[i].maxMember, $self);
                             addcolor(carData[i].curtMember, $self);
-  //                          $.getScript('js/btn.js');//重加载js
+                            //                          $.getScript('js/btn.js');//重加载js
                         }
-                        j=2;
+                        j = 2;
                         scriptReload();
-                        carData1=carData;//返回新数据
+                        carData1 = carData;//返回新数据
 
                     },
                     error: function () {
                         alert('net wrong');
                     }
                 });
-                
+
                 wrapper.refresh();
                 /****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
             }, 1000);
@@ -275,12 +279,12 @@
             //上拉加载更多数据
             //函数写这
 //            alert(carData1.length);
-			//重加载js
+            //重加载js
 //            if(ticker3==0){
 //                $('.list-unstyled').children('.child').remove();//remove function!!!!
 //                ticker3=1;
 //            }
-            var length = carData1.length -3;
+            var length = carData1.length - 3;
             for (var i = 0; i <= 9; i++) {
                 if (ticker * 10 + i > length || ticker2 == 1) {
                     //没有更多数据
@@ -320,13 +324,13 @@
                         );
                     var m = j + 1;
                     $self = $('.list-unstyled li:eq(' + m + ')');
-                    if(data[j].maxMember==data[j].curtMember){
+                    if (data[j].maxMember == data[j].curtMember) {
                         disBtn($self);
                     }
                     addperson(carData1[j].maxMember, $self);
                     addcolor(carData1[j].curtMember, $self);
                 }
-                j+=1;
+                j += 1;
             }
             scriptReload();
             ticker += 1;

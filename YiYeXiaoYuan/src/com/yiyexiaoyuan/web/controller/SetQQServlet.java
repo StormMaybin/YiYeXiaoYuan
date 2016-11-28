@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONObject;
 
 import com.yiyexiaoyuan.domain.User;
@@ -21,6 +23,7 @@ public class SetQQServlet extends HttpServlet
 	/**
 	 * 
 	 */
+	public static Logger logger = Logger.getLogger(SetQQServlet.class);
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +40,7 @@ public class SetQQServlet extends HttpServlet
 		
 		User user = null;
 		user = WebUtils.request2Bean(request, User.class);
+		
 		if (user != null)
 		{
 			boolean result = service.updateQqService(user);
@@ -69,5 +73,4 @@ public class SetQQServlet extends HttpServlet
 			return;
 		}
 	}
-
 }

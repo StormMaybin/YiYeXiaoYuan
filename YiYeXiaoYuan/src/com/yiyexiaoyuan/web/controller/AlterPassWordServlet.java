@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONObject;
 
 import com.yiyexiaoyuan.domain.User;
@@ -21,6 +23,8 @@ public class AlterPassWordServlet extends HttpServlet
 	/**
 	 * 
 	 */
+	public static Logger logger = Logger.getLogger(AlterPassWordServlet.class);
+
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,16 +51,15 @@ public class AlterPassWordServlet extends HttpServlet
 			if (result)
 			{
 				JSONObject json = new JSONObject();
-				json.accumulate("type", 2);
+//				json.accumulate("status", 1);
 				PrintWriter out = response.getWriter();
 				out.print(json.toString());
 				out.close();
-				System.out.println("TYPE2");
 				return;
 			} 
 			else// 修改密码失败
 			{
-				
+				logger.info("修改密码失败");
 			}
 		}
 	}

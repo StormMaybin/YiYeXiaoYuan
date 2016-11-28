@@ -6,12 +6,16 @@ import org.apache.log4j.PropertyConfigurator;
 
 public class Log4jTest
 {
-	private static Logger logger = Logger.getLogger(Log4jTest.class);
-	
+	static Logger logger;
+	static {
+		logger = Logger.getLogger(Log4jTest.class);
+		PropertyConfigurator.configure("src/log4j.properties");
+	}
 	
 	public static void main(String[] args)
 	{
-		PropertyConfigurator.configure("log4j.properties");
-		logger.warn("hahhaha");
+		PropertyConfigurator.configure("src/log4j.properties");
+		logger.info("hahhaha");
+		logger.error("数据库错误");
 	}
 }

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONObject;
 
 import com.yiyexiaoyuan.dao.impl.UserDaoImpl;
@@ -23,7 +25,7 @@ public class NewCarServlet extends HttpServlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public static Logger logger = Logger.getLogger(NewCarServlet.class);
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -36,32 +38,23 @@ public class NewCarServlet extends HttpServlet
 		InformationForm form = null;
 		
 		form = WebUtils.request2Bean(request, InformationForm.class);
-		System.out.println(form.getMessage());
-		System.out.println(form.toString());
-		System.out.println("saggaggd"+form.getPubTime());
 		if (form != null)
 		{
 			//设置uid
 			form.setUid(new UserDaoImpl().find(form.getUserName()).getId()+"");
-			System.out.println("__________________");
-			System.out.println(form.toString());
-			System.out.println("__________________");
+
+			//创建information对象
 			Information i = new Information();
 	
-		
+			//拷贝bean
 			WebUtils.copyBean(form, i);
-			
-			System.out.println(i.getStartDate());
-			
-//			System.out.println(i);
-			System.out.println("哈哈哈");
-			System.out.println(i);
+			//如果拷贝成功的话
 			if (i != null)
 			{
 				InformationService service = new InformationServiceImpl();
 				
 				//开始添加行程
-				System.out.println("开始添加");
+			
 				boolean result = service.addInformationService(i);
 				
 				if (result)
@@ -70,7 +63,7 @@ public class NewCarServlet extends HttpServlet
 					json.accumulate("status", 1);
 					response.getWriter().print(json.toString());
 					response.getWriter().close();
-					System.out.println("发布新拼车成功");
+					logger.info("发布新拼车成功");
 				}
 				else
 				{
@@ -78,7 +71,7 @@ public class NewCarServlet extends HttpServlet
 					json.accumulate("status", 0);
 					response.getWriter().print(json.toString());
 					response.getWriter().close();
-					System.out.println("发起新拼车失败");
+					logger.info("发布新拼车失败");
 				}
 			}
 		}

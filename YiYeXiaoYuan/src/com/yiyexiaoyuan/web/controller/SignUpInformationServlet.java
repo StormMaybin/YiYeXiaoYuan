@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import net.sf.json.JSONObject;
 
 import com.yiyexiaoyuan.dao.InformationDao;
@@ -25,6 +27,7 @@ public class SignUpInformationServlet extends HttpServlet
 	/**
 	 * 
 	 */
+	public static Logger logger = Logger.getLogger(SignUpInformationServlet.class);
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,9 +39,15 @@ public class SignUpInformationServlet extends HttpServlet
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
+		/**
+		 * 拿到iId 和uId
+		 */
 		int iId = Integer.parseInt(request.getParameter("iId"));
 		int uId = Integer.parseInt(request.getParameter("uId"));
 
+		/**
+		 * 校验数据
+		 */
 		int isOk = checked(iId, uId);
 		//不符合报名，开始向前台返回数据
 		if (isOk != 1)
@@ -57,17 +66,17 @@ public class SignUpInformationServlet extends HttpServlet
 			{
 				JSONObject json = new JSONObject();
 				json.accumulate("status", 1);
-				System.out.println("报名成功");
 				response.getWriter().print(json.toString());
 				response.getWriter().close();
+				logger.info("报名成功");
 			}
 			else
 			{
 				JSONObject json = new JSONObject();
 				json.accumulate("status", -1);
-				System.out.println("报名失败");
 				response.getWriter().print(json.toString());
 				response.getWriter().close();
+				logger.info("报名失败");
 			}
 		}
 	}
@@ -87,13 +96,19 @@ public class SignUpInformationServlet extends HttpServlet
 		ArrayList<Information> list = null;
 		//查询出这个用户的所有行程
 		list = mservice.queryMyInformationService(uId);
+		
 		if (list == null)
 		{
+			//代表可以报名此行程
 			return 1;
 		}
 		else
 		{
+			//如果此用户还有其他行程，那么开始判断是否合规则
+			//创建业务逻辑层的逻辑
 			InformationDao idao = new InformationDaoImpl();
+			
+			//根据要报名参加行程的id拿到行程信息
 			Information i = idao.queryInformationById(iId);
 			
 			//判断是否已经报名过该行程,如果已报名，那么直接返回-1
@@ -101,7 +116,6 @@ public class SignUpInformationServlet extends HttpServlet
 			{
 				if (info.getId() == iId)
 				{
-					System.out.println(info.getId()+"---"+iId);
 					//已报名成功
 					return -1;
 				}
